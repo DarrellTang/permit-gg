@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import * as motion from "motion/react-client"
-import { Mascot } from "@/components/mascot/mascot"
 
 export function Hero() {
   return (
@@ -68,14 +67,14 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Mascot */}
+        {/* Mascot placeholder — will be redesigned later */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-shrink-0 items-center justify-center"
+          className="flex h-64 w-64 flex-shrink-0 items-center justify-center rounded-2xl border border-neon-purple/30 bg-card/50"
         >
-          <Mascot size="lg" pose="encouraging" />
+          <span className="font-display text-4xl text-neon-purple/40">?</span>
         </motion.div>
       </div>
     </section>
