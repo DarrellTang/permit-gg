@@ -12,7 +12,7 @@ Permit.GG delivers a CA DMV permit test prep app in five phases that follow the 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation + Question Bank** - Project scaffold, database schema, verified seed questions, and base UI shell
+- [x] **Phase 1: Foundation + Question Bank** - Project scaffold, database schema, verified seed questions, and base UI shell
 - [ ] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries
 - [ ] **Phase 3: AI Question Variation Engine** - Batch pre-generation, real-time fallback, and variation pool serving
 - [ ] **Phase 4: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
@@ -35,7 +35,7 @@ Plans:
 - [x] 01-01-PLAN.md — Project scaffold, cyberpunk theming, type contracts, and test infrastructure
 - [x] 01-02-PLAN.md — Supabase schema migrations and ~300 CA DMV seed questions
 - [x] 01-03-PLAN.md — Responsive app shell with adaptive navigation and dashboard placeholder
-- [ ] 01-04-PLAN.md — Marketing landing page, mascot character, and visual verification checkpoint
+- [x] 01-04-PLAN.md — Marketing landing page, mascot character, and visual verification checkpoint
 
 ### Phase 2: Core Quiz Flow
 **Goal**: Users can take practice quizzes and simulated DMV tests with immediate feedback, explanations, and post-quiz summaries
@@ -107,7 +107,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Question Bank | 3/4 | In Progress |  |
+| 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
 | 2. Core Quiz Flow | 0/0 | Not started | - |
 | 3. AI Question Variation Engine | 0/0 | Not started | - |
 | 4. Analytics + Category Intelligence | 0/0 | Not started | - |
