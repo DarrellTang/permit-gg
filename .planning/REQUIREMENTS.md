@@ -14,7 +14,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **QENG-03**: User sees AI-generated variations of seed questions (different phrasing, same concept, same correct answer)
 - [ ] **QENG-04**: AI variations are pre-generated in batches (3-5 per seed) via Claude Batch API
 - [ ] **QENG-05**: When pre-generated pool is depleted, system generates new variations in real-time via Claude API
-- [ ] **QENG-06**: All questions use 4-option multiple choice format matching the real CA DMV test
+- [x] **QENG-06**: All questions use 4-option multiple choice format matching the real CA DMV test
 - [ ] **QENG-07**: User sees an immediate explanation when answering incorrectly, referencing the relevant CA DMV handbook section
 
 ### Practice Quiz
@@ -65,7 +65,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### UI/UX
 
 - [ ] **UI-01**: App is mobile-responsive with touch-friendly targets
-- [ ] **UI-02**: App supports dark mode from launch
+- [x] **UI-02**: App supports dark mode from launch
 - [ ] **UI-03**: UI is engaging for a teen audience (not sterile/corporate)
 
 ## v2 Requirements
@@ -114,7 +114,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | QENG-03 | Phase 3 | Pending |
 | QENG-04 | Phase 3 | Pending |
 | QENG-05 | Phase 3 | Pending |
-| QENG-06 | Phase 1 | Pending |
+| QENG-06 | Phase 1 | Complete |
 | QENG-07 | Phase 2 | Pending |
 | QUIZ-01 | Phase 2 | Pending |
 | QUIZ-02 | Phase 2 | Pending |
@@ -141,7 +141,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRS-02 | Phase 5 | Pending |
 | SRS-03 | Phase 5 | Pending |
 | UI-01 | Phase 1 | Pending |
-| UI-02 | Phase 1 | Pending |
+| UI-02 | Phase 1 | Complete |
 | UI-03 | Phase 1 | Pending |
 
 **Coverage:**

@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 4 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffold, cyberpunk theming, type contracts, and test infrastructure
+- [x] 01-01-PLAN.md — Project scaffold, cyberpunk theming, type contracts, and test infrastructure
 - [ ] 01-02-PLAN.md — Supabase schema migrations and ~300 CA DMV seed questions
 - [ ] 01-03-PLAN.md — Responsive app shell with adaptive navigation and dashboard placeholder
 - [ ] 01-04-PLAN.md — Marketing landing page, mascot character, and visual verification checkpoint
@@ -107,7 +107,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Question Bank | 0/4 | Planning complete | - |
+| 1. Foundation + Question Bank | 1/4 | In Progress | - |
 | 2. Core Quiz Flow | 0/0 | Not started | - |
 | 3. AI Question Variation Engine | 0/0 | Not started | - |
 | 4. Analytics + Category Intelligence | 0/0 | Not started | - |
