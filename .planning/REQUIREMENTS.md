@@ -109,13 +109,46 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (Populated during roadmap creation) | | |
+| QENG-01 | Phase 1 | Pending |
+| QENG-02 | Phase 1 | Pending |
+| QENG-03 | Phase 3 | Pending |
+| QENG-04 | Phase 3 | Pending |
+| QENG-05 | Phase 3 | Pending |
+| QENG-06 | Phase 1 | Pending |
+| QENG-07 | Phase 2 | Pending |
+| QUIZ-01 | Phase 2 | Pending |
+| QUIZ-02 | Phase 2 | Pending |
+| QUIZ-03 | Phase 2 | Pending |
+| SIM-01 | Phase 2 | Pending |
+| SIM-02 | Phase 2 | Pending |
+| SIM-03 | Phase 2 | Pending |
+| SIM-04 | Phase 2 | Pending |
+| DRILL-01 | Phase 4 | Pending |
+| DRILL-02 | Phase 4 | Pending |
+| MISS-01 | Phase 3 | Pending |
+| MISS-02 | Phase 5 | Pending |
+| MISS-03 | Phase 5 | Pending |
+| FLASH-01 | Phase 5 | Pending |
+| FLASH-02 | Phase 5 | Pending |
+| FLASH-03 | Phase 5 | Pending |
+| ANAL-01 | Phase 2 | Pending |
+| ANAL-02 | Phase 4 | Pending |
+| ANAL-03 | Phase 4 | Pending |
+| ANAL-04 | Phase 4 | Pending |
+| ANAL-05 | Phase 4 | Pending |
+| ANAL-06 | Phase 2 | Pending |
+| SRS-01 | Phase 5 | Pending |
+| SRS-02 | Phase 5 | Pending |
+| SRS-03 | Phase 5 | Pending |
+| UI-01 | Phase 1 | Pending |
+| UI-02 | Phase 1 | Pending |
+| UI-03 | Phase 1 | Pending |
 
 **Coverage:**
-- v1 requirements: 30 total
-- Mapped to phases: 0
-- Unmapped: 30 (pending roadmap)
+- v1 requirements: 34 total
+- Mapped to phases: 34
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after initial definition*
+*Last updated: 2026-03-17 after roadmap creation*
