@@ -64,9 +64,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### UI/UX
 
-- [ ] **UI-01**: App is mobile-responsive with touch-friendly targets
+- [x] **UI-01**: App is mobile-responsive with touch-friendly targets
 - [x] **UI-02**: App supports dark mode from launch
-- [ ] **UI-03**: UI is engaging for a teen audience (not sterile/corporate)
+- [x] **UI-03**: UI is engaging for a teen audience (not sterile/corporate)
 
 ## v2 Requirements
 
@@ -140,9 +140,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRS-01 | Phase 5 | Pending |
 | SRS-02 | Phase 5 | Pending |
 | SRS-03 | Phase 5 | Pending |
-| UI-01 | Phase 1 | Pending |
+| UI-01 | Phase 1 | Complete |
 | UI-02 | Phase 1 | Complete |
-| UI-03 | Phase 1 | Pending |
+| UI-03 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 34 total
