@@ -29,11 +29,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Database contains ~300 seed questions sourced from the CA DMV handbook, each tagged to a specific category (signs, right-of-way, traffic laws, speed limits, DUI/drug laws, safe driving, parking, sharing the road)
   3. All seed questions use 4-option multiple choice format matching the real CA DMV test
   4. App has a teen-friendly visual identity (not sterile/corporate) with engaging colors, typography, and micro-interactions
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Project scaffold, cyberpunk theming, type contracts, and test infrastructure
+- [ ] 01-02-PLAN.md — Supabase schema migrations and ~300 CA DMV seed questions
+- [ ] 01-03-PLAN.md — Responsive app shell with adaptive navigation and dashboard placeholder
+- [ ] 01-04-PLAN.md — Marketing landing page, mascot character, and visual verification checkpoint
 
 ### Phase 2: Core Quiz Flow
 **Goal**: Users can take practice quizzes and simulated DMV tests with immediate feedback, explanations, and post-quiz summaries
@@ -105,7 +107,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Question Bank | 0/0 | Not started | - |
+| 1. Foundation + Question Bank | 0/4 | Planning complete | - |
 | 2. Core Quiz Flow | 0/0 | Not started | - |
 | 3. AI Question Variation Engine | 0/0 | Not started | - |
 | 4. Analytics + Category Intelligence | 0/0 | Not started | - |
