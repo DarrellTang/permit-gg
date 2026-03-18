@@ -18,7 +18,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${orbitron.variable} ${chakraPetch.variable}`}
+      className={`dark ${inter.variable} ${orbitron.variable} ${chakraPetch.variable}`}
     >
       <body className="font-body antialiased">
         <ThemeProvider
