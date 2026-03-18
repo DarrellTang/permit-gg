@@ -9,8 +9,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Question Engine
 
-- [ ] **QENG-01**: User sees questions sourced from a verified CA DMV question bank (~300 seed questions)
-- [ ] **QENG-02**: Every question is tagged to a CA DMV category (road signs, right-of-way, traffic laws, speed limits, DUI/drug laws, safe driving, parking, sharing the road)
+- [x] **QENG-01**: User sees questions sourced from a verified CA DMV question bank (~300 seed questions)
+- [x] **QENG-02**: Every question is tagged to a CA DMV category (road signs, right-of-way, traffic laws, speed limits, DUI/drug laws, safe driving, parking, sharing the road)
 - [ ] **QENG-03**: User sees AI-generated variations of seed questions (different phrasing, same concept, same correct answer)
 - [ ] **QENG-04**: AI variations are pre-generated in batches (3-5 per seed) via Claude Batch API
 - [ ] **QENG-05**: When pre-generated pool is depleted, system generates new variations in real-time via Claude API
@@ -109,8 +109,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| QENG-01 | Phase 1 | Pending |
-| QENG-02 | Phase 1 | Pending |
+| QENG-01 | Phase 1 | Complete |
+| QENG-02 | Phase 1 | Complete |
 | QENG-03 | Phase 3 | Pending |
 | QENG-04 | Phase 3 | Pending |
 | QENG-05 | Phase 3 | Pending |
