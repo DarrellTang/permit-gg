@@ -1,16 +1,30 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { Suspense, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useQuizStore } from "@/stores/quiz-store"
 import { computeQuizSummary } from "@/lib/utils/quiz-summary"
+import { fetchSessionSummary } from "@/server/actions/quiz"
 import { ScoreReveal } from "@/components/summary/score-reveal"
 import { QuizStats } from "@/components/summary/quiz-stats"
 import { CategoryRadar } from "@/components/summary/category-radar"
 import { WrongAnswerCarousel } from "@/components/summary/wrong-answer-carousel"
 import { SmartActions } from "@/components/summary/smart-actions"
+import type { QuizSummary } from "@/lib/utils/quiz-summary"
 
 export default function PracticeSummaryPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-background to-muted/30">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-neon-cyan border-t-transparent" />
+      </div>
+    }>
+      <PracticeSummaryContent />
+    </Suspense>
+  )
+}
+
+function PracticeSummaryContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get("session")
 
@@ -20,6 +34,9 @@ export default function PracticeSummaryPage() {
   const sessionStartTime = useQuizStore((s) => s.sessionStartTime)
 
   const [totalTimeMs, setTotalTimeMs] = useState(0)
+  const [remoteSummary, setRemoteSummary] = useState<QuizSummary | null>(null)
+  const [remoteBestStreak, setRemoteBestStreak] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (sessionStartTime > 0) {
@@ -27,10 +44,37 @@ export default function PracticeSummaryPage() {
     }
   }, [sessionStartTime])
 
-  const summary = useMemo(() => {
+  const localSummary = useMemo(() => {
     if (answers.length === 0 || questions.length === 0) return null
     return computeQuizSummary(answers, questions)
   }, [answers, questions])
+
+  useEffect(() => {
+    if (!localSummary && sessionId) {
+      setLoading(true)
+      fetchSessionSummary(sessionId)
+        .then((result) => {
+          if (result) {
+            setRemoteSummary(result.summary)
+            setRemoteBestStreak(result.bestStreak)
+            setTotalTimeMs(result.totalTimeMs)
+          }
+        })
+        .catch(() => {})
+        .finally(() => setLoading(false))
+    }
+  }, [localSummary, sessionId])
+
+  const summary = localSummary ?? remoteSummary
+  const effectiveBestStreak = localSummary ? bestStreak : remoteBestStreak
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-background to-muted/30">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-neon-cyan border-t-transparent" />
+      </div>
+    )
+  }
 
   if (!summary) {
     return (
@@ -48,7 +92,7 @@ export default function PracticeSummaryPage() {
         <ScoreReveal score={summary.score} total={summary.total} />
 
         <QuizStats
-          bestStreak={bestStreak}
+          bestStreak={effectiveBestStreak}
           totalTimeMs={totalTimeMs}
           score={summary.score}
           total={summary.total}

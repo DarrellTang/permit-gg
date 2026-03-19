@@ -8,7 +8,7 @@ interface CategoryBreakdown {
   percentage: number
 }
 
-interface QuizSummaryResult {
+export interface QuizSummary {
   score: number
   total: number
   percentage: number
@@ -20,7 +20,7 @@ interface QuizSummaryResult {
 export function computeQuizSummary(
   answers: QuizAnswer[],
   questions: PreparedQuestion[]
-): QuizSummaryResult {
+): QuizSummary {
   const score = answers.filter((a) => a.isCorrect).length
   const total = answers.length
   const percentage = total > 0 ? Math.round((score / total) * 100) : 0

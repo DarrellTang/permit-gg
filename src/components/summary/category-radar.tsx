@@ -30,11 +30,11 @@ interface CategoryRadarProps {
 
 const SHORT_NAMES: Record<string, string> = {
   "road-signs": "Signs",
-  "right-of-way": "Right-of-Way",
+  "right-of-way": "ROW",
   "traffic-laws": "Traffic",
   "speed-limits": "Speed",
   "dui-drug-laws": "DUI",
-  "safe-driving": "Safe Driving",
+  "safe-driving": "Safety",
   parking: "Parking",
   "sharing-the-road": "Sharing",
 }
