@@ -130,7 +130,7 @@ export function QuizShell({ mode }: QuizShellProps) {
             </p>
           </div>
 
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-3 relative z-0">
             <span className="font-display text-5xl font-bold text-neon-cyan">
               {count}
             </span>
@@ -197,7 +197,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   if (quiz.mode === "sim" && quiz.reviewingFlagged) {
     return (
-      <div className="fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30">
+      <div className="min-h-screen overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30">
         <FlaggedReview
           onNavigateToQuestion={quiz.handleNavigateToFlagged}
           onSubmitTest={handleSimSubmit}
@@ -216,7 +216,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30 ${
+      className={`min-h-screen overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30 ${
         mode === "sim" ? "ring-2 ring-inset ring-neon-purple/30" : ""
       }`}
     >
