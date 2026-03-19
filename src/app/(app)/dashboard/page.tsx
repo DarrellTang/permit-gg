@@ -87,12 +87,12 @@ export default function DashboardPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <button
-              disabled
-              className="rounded-lg bg-neon-purple/20 px-4 py-2 font-ui text-sm font-semibold text-neon-purple opacity-60 transition-all"
+            <Link
+              href="/simulated-test"
+              className="inline-block rounded-lg bg-neon-purple/20 px-4 py-2 font-ui text-sm font-semibold text-neon-purple transition-all hover:bg-neon-purple/30"
             >
-              Coming Soon
-            </button>
+              Start Sim Test
+            </Link>
           </CardContent>
         </Card>
 
