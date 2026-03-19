@@ -74,10 +74,10 @@ export function CategoryRadar({ categoryBreakdown }: CategoryRadarProps) {
         className="mx-auto aspect-square h-[250px] sm:h-[300px]"
       >
         <RadarChart data={data} cx="50%" cy="50%" outerRadius="80%">
-          <PolarGrid stroke="hsl(var(--border))" />
+          <PolarGrid stroke="var(--color-border)" />
           <PolarAngleAxis
             dataKey="category"
-            tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
+            tick={{ fill: "var(--color-muted-foreground)", fontSize: 11 }}
           />
           <PolarRadiusAxis
             angle={90}
