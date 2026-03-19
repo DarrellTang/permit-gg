@@ -15,7 +15,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **QENG-04**: AI variations are pre-generated in batches (3-5 per seed) via Claude Batch API
 - [ ] **QENG-05**: When pre-generated pool is depleted, system generates new variations in real-time via Claude API
 - [x] **QENG-06**: All questions use 4-option multiple choice format matching the real CA DMV test
-- [ ] **QENG-07**: User sees an immediate explanation when answering incorrectly, referencing the relevant CA DMV handbook section
+- [x] **QENG-07**: User sees an immediate explanation when answering incorrectly, referencing the relevant CA DMV handbook section
 
 ### Practice Quiz
 
@@ -115,7 +115,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | QENG-04 | Phase 3 | Pending |
 | QENG-05 | Phase 3 | Pending |
 | QENG-06 | Phase 1 | Complete |
-| QENG-07 | Phase 2 | Pending |
+| QENG-07 | Phase 2 | Complete |
 | QUIZ-01 | Phase 2 | Complete |
 | QUIZ-02 | Phase 2 | Complete |
 | QUIZ-03 | Phase 2 | Complete |
