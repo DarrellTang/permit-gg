@@ -24,6 +24,8 @@ export function useQuiz() {
   const isComplete = useQuizStore((s) => s.isComplete)
   const isMuted = useQuizStore((s) => s.isMuted)
   const sessionStartTime = useQuizStore((s) => s.sessionStartTime)
+  const flaggedIndices = useQuizStore((s) => s.flaggedIndices)
+  const reviewingFlagged = useQuizStore((s) => s.reviewingFlagged)
 
   const initSession = useQuizStore((s) => s.initSession)
   const selectAnswer = useQuizStore((s) => s.selectAnswer)
@@ -33,6 +35,10 @@ export function useQuiz() {
   const quitQuiz = useQuizStore((s) => s.quitQuiz)
   const toggleMute = useQuizStore((s) => s.toggleMute)
   const reset = useQuizStore((s) => s.reset)
+  const startFlaggedReview = useQuizStore((s) => s.startFlaggedReview)
+  const navigateToFlagged = useQuizStore((s) => s.navigateToFlagged)
+  const submitFlaggedAnswer = useQuizStore((s) => s.submitFlaggedAnswer)
+  const returnToReview = useQuizStore((s) => s.returnToReview)
 
   const currentQuestion =
     questions.length > 0 && currentIndex < questions.length
@@ -40,6 +46,9 @@ export function useQuiz() {
       : null
 
   const isLastQuestion = currentIndex >= totalQuestions - 1
+
+  const allSimQuestionsAnswered =
+    mode === "sim" && answers.length >= totalQuestions
 
   const progress =
     totalQuestions > 0 ? ((currentIndex + 1) / totalQuestions) * 100 : 0
@@ -126,6 +135,38 @@ export function useQuiz() {
     return result.sessionId
   }, [mode, totalQuestions, answers, sessionStartTime, completeQuiz])
 
+  const handleSimComplete = useCallback(async () => {
+    const sessionId = await handleComplete()
+
+    if (mode === "sim" && sessionId) {
+      router.push(`/simulated-test/summary?session=${sessionId}`)
+    }
+
+    return sessionId
+  }, [handleComplete, mode, router])
+
+  const handleNavigateToFlagged = useCallback(
+    (index: number) => {
+      navigateToFlagged(index)
+    },
+    [navigateToFlagged]
+  )
+
+  const handleSubmitFlaggedAnswer = useCallback(
+    (index: number) => {
+      submitFlaggedAnswer(index)
+    },
+    [submitFlaggedAnswer]
+  )
+
+  const handleReturnToReview = useCallback(() => {
+    returnToReview()
+  }, [returnToReview])
+
+  const handleStartFlaggedReview = useCallback(() => {
+    startFlaggedReview()
+  }, [startFlaggedReview])
+
   return {
     mode,
     currentQuestion,
@@ -142,6 +183,9 @@ export function useQuiz() {
     isLastQuestion,
     isMuted,
     answers,
+    flaggedIndices,
+    reviewingFlagged,
+    allSimQuestionsAnswered,
 
     startQuiz,
     handleSelect,
@@ -149,8 +193,13 @@ export function useQuiz() {
     handleNext,
     handleQuit,
     handleComplete,
+    handleSimComplete,
     scheduleAutoAdvance,
     toggleMute,
     reset,
+    handleStartFlaggedReview,
+    handleNavigateToFlagged,
+    handleSubmitFlaggedAnswer,
+    handleReturnToReview,
   }
 }

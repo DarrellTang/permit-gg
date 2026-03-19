@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
-import { motion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import { useQuiz } from "@/hooks/use-quiz"
 import { useQuizSounds } from "@/hooks/use-sound-fx"
 import { fireConfetti } from "@/hooks/use-confetti"
@@ -10,6 +10,8 @@ import { QuestionCard } from "./question-card"
 import { QuitDialog } from "./quit-dialog"
 import { QuestionCountConfig } from "./question-count-config"
 import { StreakCelebration } from "./streak-celebration"
+import { FlaggedReview } from "./flagged-review"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PRACTICE_DEFAULTS } from "@/lib/constants/quiz-config"
 import type { QuizMode } from "@/lib/types/quiz"
@@ -28,6 +30,8 @@ export function QuizShell({ mode }: QuizShellProps) {
   const [count, setCount] = useState<number>(PRACTICE_DEFAULTS.defaultCount)
   const [quitDialogOpen, setQuitDialogOpen] = useState(false)
   const [showStreak, setShowStreak] = useState(false)
+  const [simSubmitting, setSimSubmitting] = useState(false)
+  const [answerRecorded, setAnswerRecorded] = useState(false)
   const prevAnswerCountRef = useRef(0)
 
   const quiz = useQuiz()
@@ -44,9 +48,11 @@ export function QuizShell({ mode }: QuizShellProps) {
   }, [mode, count, quiz.startQuiz])
 
   const handleSubmit = useCallback(() => {
-    sounds.playSubmit()
+    if (mode === "practice") {
+      sounds.playSubmit()
+    }
     quiz.handleSubmit()
-  }, [quiz.handleSubmit, sounds.playSubmit])
+  }, [mode, quiz.handleSubmit, sounds.playSubmit])
 
   useEffect(() => {
     if (quiz.answers.length <= prevAnswerCountRef.current) return
@@ -68,20 +74,44 @@ export function QuizShell({ mode }: QuizShellProps) {
         sounds.playWrong()
       }
     }
+
+    if (quiz.mode === "sim") {
+      setAnswerRecorded(true)
+      setTimeout(() => setAnswerRecorded(false), 800)
+    }
   }, [quiz.answers.length])
 
   useEffect(() => {
-    if (quiz.isComplete && shellState === "active") {
+    if (quiz.mode === "sim" && quiz.allSimQuestionsAnswered && shellState === "active") {
+      if (quiz.flaggedIndices.size > 0) {
+        quiz.handleStartFlaggedReview()
+      } else {
+        quiz.handleStartFlaggedReview()
+      }
+    }
+  }, [quiz.allSimQuestionsAnswered, shellState])
+
+  useEffect(() => {
+    if (quiz.mode === "practice" && quiz.isComplete && shellState === "active") {
       setShellState("complete")
       quiz.handleComplete()
     }
-  }, [quiz.isComplete, shellState])
+  }, [quiz.isComplete, shellState, quiz.mode])
 
   useEffect(() => {
     if (mode === "sim" && shellState === "loading") {
       handleStart()
     }
   }, [])
+
+  const handleSimSubmit = useCallback(async () => {
+    setSimSubmitting(true)
+    try {
+      await quiz.handleSimComplete()
+    } catch {
+      setSimSubmitting(false)
+    }
+  }, [quiz.handleSimComplete])
 
   if (shellState === "pre-start") {
     return (
@@ -165,19 +195,51 @@ export function QuizShell({ mode }: QuizShellProps) {
     )
   }
 
+  if (quiz.mode === "sim" && quiz.reviewingFlagged) {
+    return (
+      <div className="fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30">
+        <FlaggedReview
+          onNavigateToQuestion={quiz.handleNavigateToFlagged}
+          onSubmitTest={handleSimSubmit}
+          isSubmitting={simSubmitting}
+        />
+      </div>
+    )
+  }
+
   if (!quiz.currentQuestion) return null
 
+  const isFlaggedReviewQuestion =
+    quiz.mode === "sim" &&
+    quiz.allSimQuestionsAnswered &&
+    !quiz.reviewingFlagged
+
   return (
-    <div className="fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30">
-      <StreakCelebration streak={quiz.streak} show={showStreak} />
+    <div
+      className={`fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30 ${
+        mode === "sim" ? "ring-2 ring-inset ring-neon-purple/30" : ""
+      }`}
+    >
+      {mode === "practice" && (
+        <StreakCelebration streak={quiz.streak} show={showStreak} />
+      )}
       <div className="mx-auto max-w-2xl p-4 sm:p-6">
         <div className="mb-6 flex items-center gap-3">
+          {mode === "sim" && (
+            <Badge className="shrink-0 bg-neon-purple/20 text-neon-purple border-neon-purple/30 font-ui text-[10px] font-bold uppercase tracking-widest">
+              SIM
+            </Badge>
+          )}
           <div className="flex-1">
             <QuizProgressBar
-              current={quiz.currentIndex}
+              current={
+                quiz.allSimQuestionsAnswered
+                  ? quiz.totalQuestions - 1
+                  : quiz.currentIndex
+              }
               total={quiz.totalQuestions}
               correctCount={quiz.score}
-              streak={quiz.streak}
+              streak={mode === "practice" ? quiz.streak : 0}
             />
           </div>
           <button
@@ -202,6 +264,20 @@ export function QuizShell({ mode }: QuizShellProps) {
           </button>
         </div>
 
+        <AnimatePresence>
+          {answerRecorded && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="mb-4 text-center font-ui text-sm text-muted-foreground"
+            >
+              Answer recorded
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <QuestionCard
           question={quiz.currentQuestion}
           questionIndex={quiz.currentIndex}
@@ -212,6 +288,15 @@ export function QuizShell({ mode }: QuizShellProps) {
           onSelect={quiz.handleSelect}
           onSubmit={handleSubmit}
           onNext={quiz.handleNext}
+          isFlaggedReview={isFlaggedReviewQuestion}
+          onSubmitFlagged={
+            isFlaggedReviewQuestion
+              ? () => quiz.handleSubmitFlaggedAnswer(quiz.currentIndex)
+              : undefined
+          }
+          onReturnToReview={
+            isFlaggedReviewQuestion ? quiz.handleReturnToReview : undefined
+          }
         />
       </div>
 

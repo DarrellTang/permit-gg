@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "motion/react"
 import { AnswerOption } from "./answer-option"
 import { AnswerFeedback } from "./answer-feedback"
+import { FlagButton } from "./flag-button"
 import { Button } from "@/components/ui/button"
 import type { PreparedQuestion, AnswerState, QuizMode } from "@/lib/types/quiz"
 
@@ -16,6 +17,9 @@ interface QuestionCardProps {
   onSelect: (answer: string) => void
   onSubmit: () => void
   onNext: () => void
+  isFlaggedReview?: boolean
+  onSubmitFlagged?: () => void
+  onReturnToReview?: () => void
 }
 
 export function QuestionCard({
@@ -28,6 +32,9 @@ export function QuestionCard({
   onSelect,
   onSubmit,
   onNext,
+  isFlaggedReview,
+  onSubmitFlagged,
+  onReturnToReview,
 }: QuestionCardProps) {
   const isRevealed = answerState === "revealed"
   const isCorrect = selectedAnswer === question.correctAnswer
@@ -43,6 +50,12 @@ export function QuestionCard({
         className="space-y-4"
       >
         <div className="rounded-xl border border-border/40 bg-card/80 p-5">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="font-ui text-xs text-muted-foreground">
+              Q{questionIndex + 1}
+            </span>
+            {mode === "sim" && <FlagButton />}
+          </div>
           <p className="font-body text-base leading-relaxed text-foreground">
             {question.questionText}
           </p>
@@ -64,33 +77,58 @@ export function QuestionCard({
           ))}
         </div>
 
-        <AnswerFeedback
-          explanation={question.explanation}
-          handbookReference={question.handbookReference}
-          answerState={answerState}
-          isCorrect={isCorrect}
-          mode={mode}
-        />
+        {mode === "practice" && (
+          <AnswerFeedback
+            explanation={question.explanation}
+            handbookReference={question.handbookReference}
+            answerState={answerState}
+            isCorrect={isCorrect}
+            mode={mode}
+          />
+        )}
 
-        <div className="flex justify-end pt-2">
-          {!isRevealed && (
+        <div className="flex items-center justify-end gap-3 pt-2">
+          {isFlaggedReview && onReturnToReview && (
             <Button
-              onClick={onSubmit}
+              onClick={onReturnToReview}
+              variant="ghost"
+              className="font-ui text-sm text-muted-foreground hover:text-foreground"
+            >
+              Back to Review
+            </Button>
+          )}
+
+          {isFlaggedReview && onSubmitFlagged ? (
+            <Button
+              onClick={onSubmitFlagged}
               disabled={answerState !== "selected"}
               className="min-w-[120px] bg-neon-cyan/20 font-ui text-sm font-semibold text-neon-cyan hover:bg-neon-cyan/30 disabled:opacity-40"
               variant="ghost"
             >
-              Submit
+              Update Answer
             </Button>
-          )}
-          {isRevealed && !isCorrect && (
-            <Button
-              onClick={onNext}
-              className="min-w-[120px] bg-neon-purple/20 font-ui text-sm font-semibold text-neon-purple hover:bg-neon-purple/30"
-              variant="ghost"
-            >
-              {isLastQuestion ? "Finish" : "Next"}
-            </Button>
+          ) : (
+            <>
+              {!isRevealed && (
+                <Button
+                  onClick={onSubmit}
+                  disabled={answerState !== "selected"}
+                  className="min-w-[120px] bg-neon-cyan/20 font-ui text-sm font-semibold text-neon-cyan hover:bg-neon-cyan/30 disabled:opacity-40"
+                  variant="ghost"
+                >
+                  Submit
+                </Button>
+              )}
+              {isRevealed && !isCorrect && (
+                <Button
+                  onClick={onNext}
+                  className="min-w-[120px] bg-neon-purple/20 font-ui text-sm font-semibold text-neon-purple hover:bg-neon-purple/30"
+                  variant="ghost"
+                >
+                  {isLastQuestion ? "Finish" : "Next"}
+                </Button>
+              )}
+            </>
           )}
         </div>
       </motion.div>

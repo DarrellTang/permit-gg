@@ -35,6 +35,9 @@ interface QuizState {
   flagQuestion: () => void
   unflagQuestion: () => void
   startFlaggedReview: () => void
+  navigateToFlagged: (index: number) => void
+  submitFlaggedAnswer: (index: number) => void
+  returnToReview: () => void
   completeQuiz: () => void
   quitQuiz: () => void
   toggleMute: () => void
@@ -172,6 +175,67 @@ export const useQuizStore = create<QuizState>()((set, get) => ({
 
   startFlaggedReview: () => {
     set({ reviewingFlagged: true })
+  },
+
+  navigateToFlagged: (index: number) => {
+    const { flaggedIndices } = get()
+    if (!flaggedIndices.has(index)) return
+    set({
+      currentIndex: index,
+      selectedAnswer: null,
+      answerState: "idle",
+      questionStartTime: Date.now(),
+      reviewingFlagged: false,
+    })
+  },
+
+  submitFlaggedAnswer: (index: number) => {
+    const { selectedAnswer, questions, questionStartTime, score, streak, bestStreak, answers } = get()
+    if (selectedAnswer === null) return
+
+    const question = questions[index]
+    const isCorrect = selectedAnswer === question.correctAnswer
+    const timeTakenMs = Date.now() - questionStartTime
+
+    const newAnswer: QuizAnswer = {
+      questionId: question.id,
+      selectedAnswer,
+      correctAnswer: question.correctAnswer,
+      isCorrect,
+      timeTakenMs,
+    }
+
+    const existingAnswerIndex = answers.findIndex(
+      (a) => a.questionId === question.id
+    )
+    const updatedAnswers = [...answers]
+    if (existingAnswerIndex >= 0) {
+      const oldAnswer = updatedAnswers[existingAnswerIndex]
+      updatedAnswers[existingAnswerIndex] = newAnswer
+      const scoreDelta = (isCorrect ? 1 : 0) - (oldAnswer.isCorrect ? 1 : 0)
+      set({
+        answers: updatedAnswers,
+        score: score + scoreDelta,
+        selectedAnswer: null,
+        answerState: "idle",
+        reviewingFlagged: true,
+      })
+    } else {
+      const newStreak = isCorrect ? streak + 1 : 0
+      set({
+        answers: [...answers, newAnswer],
+        score: isCorrect ? score + 1 : score,
+        streak: newStreak,
+        bestStreak: Math.max(bestStreak, newStreak),
+        selectedAnswer: null,
+        answerState: "idle",
+        reviewingFlagged: true,
+      })
+    }
+  },
+
+  returnToReview: () => {
+    set({ reviewingFlagged: true, selectedAnswer: null, answerState: "idle" })
   },
 
   completeQuiz: () => {
