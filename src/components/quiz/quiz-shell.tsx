@@ -94,7 +94,7 @@ export function QuizShell({ mode }: QuizShellProps) {
   useEffect(() => {
     if (quiz.mode === "practice" && quiz.isComplete && shellState === "active") {
       setShellState("complete")
-      quiz.handleComplete()
+      quiz.handlePracticeComplete()
     }
   }, [quiz.isComplete, shellState, quiz.mode])
 

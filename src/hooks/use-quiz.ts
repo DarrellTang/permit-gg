@@ -135,6 +135,16 @@ export function useQuiz() {
     return result.sessionId
   }, [mode, totalQuestions, answers, sessionStartTime, completeQuiz])
 
+  const handlePracticeComplete = useCallback(async () => {
+    const sessionId = await handleComplete()
+
+    if (sessionId) {
+      router.push(`/practice/summary?session=${sessionId}`)
+    }
+
+    return sessionId
+  }, [handleComplete, router])
+
   const handleSimComplete = useCallback(async () => {
     const sessionId = await handleComplete()
 
@@ -193,6 +203,7 @@ export function useQuiz() {
     handleNext,
     handleQuit,
     handleComplete,
+    handlePracticeComplete,
     handleSimComplete,
     scheduleAutoAdvance,
     toggleMute,
