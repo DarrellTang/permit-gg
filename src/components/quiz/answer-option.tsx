@@ -58,11 +58,11 @@ export function AnswerOption({
           : {}
       }
       className={cn(
-        "flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left font-body text-sm transition-colors",
+        "flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left font-body text-sm transition-all duration-200",
         variant === "idle" &&
-          "border-border bg-card hover:border-muted-foreground/30 hover:bg-muted/50",
+          "cursor-pointer border-border bg-card hover:border-neon-purple/50 hover:bg-neon-purple/10 hover:shadow-[0_0_16px_var(--neon-purple)/0.15] hover:scale-[1.01] active:scale-[0.99]",
         variant === "selected" &&
-          "border-neon-cyan bg-neon-cyan/10 shadow-[0_0_12px_var(--neon-cyan)/0.2]",
+          "cursor-pointer border-neon-cyan bg-neon-cyan/10 shadow-[0_0_16px_var(--neon-cyan)/0.25]",
         variant === "correct" &&
           "border-green-500 bg-green-500/15 text-green-400",
         variant === "wrong" &&

@@ -43,6 +43,13 @@ export function QuizProgressBar({
       </div>
 
       <div className="relative h-3 overflow-hidden rounded-full bg-muted">
+        {/* Question progress — fills as you answer questions */}
+        <motion.div
+          className="absolute inset-y-0 left-0 rounded-full bg-muted-foreground/20"
+          animate={{ width: `${progress}%` }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        />
+        {/* XP bar — fills only with correct answers, glows on streak */}
         <motion.div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-neon-purple to-neon-cyan"
           animate={{ width: `${xpProgress}%` }}
@@ -53,11 +60,6 @@ export function QuizProgressBar({
                 ? "0 0 12px var(--neon-cyan), 0 0 24px var(--neon-cyan)"
                 : "none",
           }}
-        />
-        <motion.div
-          className="absolute inset-y-0 w-0.5 bg-foreground/40"
-          animate={{ left: `${progress}%` }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
       </div>
     </div>
