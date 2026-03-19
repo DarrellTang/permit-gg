@@ -128,4 +128,41 @@ describe("Question Selection", () => {
       expect(q.shuffledOptions).toContain(q.correctAnswer)
     }
   })
+
+  it("sim exactly 46: selectSimQuestions always returns exactly 46 regardless of rounding", async () => {
+    const { selectSimQuestions } = await import("@/server/db/queries/questions")
+
+    for (let run = 0; run < 5; run++) {
+      const allRows = makeAllCategoryRows(40)
+      const client = mockSupabaseClientAll(allRows)
+      const result = await selectSimQuestions(client as any)
+      expect(result).toHaveLength(46)
+    }
+  })
+
+  it("sim all categories represented: at least 1 question from each of the 8 categories", async () => {
+    const { selectSimQuestions } = await import("@/server/db/queries/questions")
+    const allRows = makeAllCategoryRows(40)
+    const client = mockSupabaseClientAll(allRows)
+
+    const result = await selectSimQuestions(client as any)
+
+    const categories = new Set(result.map((q) => q.categorySlug))
+
+    const expectedCategories = [
+      "road-signs",
+      "right-of-way",
+      "traffic-laws",
+      "speed-limits",
+      "dui-drug-laws",
+      "safe-driving",
+      "parking",
+      "sharing-the-road",
+    ]
+
+    for (const cat of expectedCategories) {
+      expect(categories.has(cat)).toBe(true)
+    }
+    expect(categories.size).toBe(8)
+  })
 })

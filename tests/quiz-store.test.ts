@@ -263,4 +263,114 @@ describe("Quiz Store", () => {
     store.getState().quitQuiz()
     expect(store.getState().isComplete).toBe(false)
   })
+
+  it("sim no reveal: after submit, answerState resets to idle and auto-advances", async () => {
+    const { useQuizStore } = await import("@/stores/quiz-store")
+    const questions = makeQuestions(10)
+    useQuizStore.getState().initSession(questions, "sim")
+    const store = useQuizStore
+
+    store.getState().selectAnswer("25 mph")
+    store.getState().submitAnswer()
+
+    expect(store.getState().answerState).toBe("idle")
+    expect(store.getState().currentIndex).toBe(1)
+    expect(store.getState().selectedAnswer).toBeNull()
+    expect(store.getState().answers).toHaveLength(1)
+  })
+
+  it("flag toggle: flagQuestion adds and unflagQuestion removes currentIndex", async () => {
+    const { useQuizStore } = await import("@/stores/quiz-store")
+    const questions = makeQuestions(10)
+    useQuizStore.getState().initSession(questions, "sim")
+    const store = useQuizStore
+
+    store.getState().flagQuestion()
+    expect(store.getState().flaggedIndices.has(0)).toBe(true)
+    expect(store.getState().flaggedIndices.size).toBe(1)
+
+    store.getState().selectAnswer("25 mph")
+    store.getState().submitAnswer()
+
+    store.getState().flagQuestion()
+    expect(store.getState().flaggedIndices.has(1)).toBe(true)
+    expect(store.getState().flaggedIndices.size).toBe(2)
+
+    store.getState().unflagQuestion()
+    expect(store.getState().flaggedIndices.has(1)).toBe(false)
+    expect(store.getState().flaggedIndices.size).toBe(1)
+    expect(store.getState().flaggedIndices.has(0)).toBe(true)
+  })
+
+  it("flagged review flow: startFlaggedReview sets reviewingFlagged, navigateToFlagged only works for flagged indices", async () => {
+    const { useQuizStore } = await import("@/stores/quiz-store")
+    const questions = makeQuestions(46)
+    useQuizStore.getState().initSession(questions, "sim")
+    const store = useQuizStore
+
+    store.getState().flagQuestion()
+    for (let i = 0; i < 46; i++) {
+      if (i === 2) store.getState().flagQuestion()
+      store.getState().selectAnswer("25 mph")
+      store.getState().submitAnswer()
+    }
+
+    store.getState().startFlaggedReview()
+    expect(store.getState().reviewingFlagged).toBe(true)
+
+    store.getState().navigateToFlagged(0)
+    expect(store.getState().currentIndex).toBe(0)
+    expect(store.getState().reviewingFlagged).toBe(false)
+
+    store.getState().navigateToFlagged(5)
+    expect(store.getState().currentIndex).toBe(0)
+  })
+
+  it("sim complete saves with passed field based on score >= 38", async () => {
+    const { useQuizStore } = await import("@/stores/quiz-store")
+    const { DMV_CONFIG } = await import("@/lib/constants/quiz-config")
+    const questions = makeQuestions(46)
+    useQuizStore.getState().initSession(questions, "sim")
+    const store = useQuizStore
+
+    for (let i = 0; i < 39; i++) {
+      store.getState().selectAnswer("25 mph")
+      store.getState().submitAnswer()
+    }
+    for (let i = 0; i < 7; i++) {
+      store.getState().selectAnswer("35 mph")
+      store.getState().submitAnswer()
+    }
+
+    expect(store.getState().score).toBe(39)
+    expect(store.getState().score >= DMV_CONFIG.passingScore).toBe(true)
+
+    store.getState().completeQuiz()
+    expect(store.getState().isComplete).toBe(true)
+  })
+
+  it("sim cannot go back to non-flagged: navigateToFlagged rejects non-flagged indices", async () => {
+    const { useQuizStore } = await import("@/stores/quiz-store")
+    const questions = makeQuestions(10)
+    useQuizStore.getState().initSession(questions, "sim")
+    const store = useQuizStore
+
+    store.getState().flagQuestion()
+
+    for (let i = 0; i < 10; i++) {
+      store.getState().selectAnswer("25 mph")
+      store.getState().submitAnswer()
+    }
+
+    store.getState().startFlaggedReview()
+    expect(store.getState().reviewingFlagged).toBe(true)
+
+    store.getState().navigateToFlagged(0)
+    expect(store.getState().currentIndex).toBe(0)
+
+    store.getState().returnToReview()
+    store.getState().navigateToFlagged(3)
+    expect(store.getState().currentIndex).toBe(0)
+    expect(store.getState().reviewingFlagged).toBe(true)
+  })
 })
