@@ -1,12 +1,15 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { motion } from "motion/react"
 import { useQuiz } from "@/hooks/use-quiz"
+import { useQuizSounds } from "@/hooks/use-sound-fx"
+import { fireConfetti } from "@/hooks/use-confetti"
 import { QuizProgressBar } from "./progress-bar"
 import { QuestionCard } from "./question-card"
 import { QuitDialog } from "./quit-dialog"
 import { QuestionCountConfig } from "./question-count-config"
+import { StreakCelebration } from "./streak-celebration"
 import { Button } from "@/components/ui/button"
 import { PRACTICE_DEFAULTS } from "@/lib/constants/quiz-config"
 import type { QuizMode } from "@/lib/types/quiz"
@@ -24,8 +27,11 @@ export function QuizShell({ mode }: QuizShellProps) {
   )
   const [count, setCount] = useState<number>(PRACTICE_DEFAULTS.defaultCount)
   const [quitDialogOpen, setQuitDialogOpen] = useState(false)
+  const [showStreak, setShowStreak] = useState(false)
+  const prevAnswerCountRef = useRef(0)
 
   const quiz = useQuiz()
+  const sounds = useQuizSounds()
 
   const handleStart = useCallback(async () => {
     setShellState("loading")
@@ -38,29 +44,31 @@ export function QuizShell({ mode }: QuizShellProps) {
   }, [mode, count, quiz.startQuiz])
 
   const handleSubmit = useCallback(() => {
+    sounds.playSubmit()
     quiz.handleSubmit()
-  }, [quiz.handleSubmit])
+  }, [quiz.handleSubmit, sounds.playSubmit])
 
-  const onSubmitEffect = useCallback(() => {
-    if (quiz.answerState !== "revealed") return
-    if (quiz.mode !== "practice") return
+  useEffect(() => {
+    if (quiz.answers.length <= prevAnswerCountRef.current) return
+    prevAnswerCountRef.current = quiz.answers.length
 
     const lastAnswer = quiz.answers[quiz.answers.length - 1]
     if (!lastAnswer) return
 
-    if (lastAnswer.isCorrect) {
-      quiz.scheduleAutoAdvance()
+    if (quiz.mode === "practice") {
+      if (lastAnswer.isCorrect) {
+        sounds.playCorrect()
+        fireConfetti(quiz.streak)
+        if (quiz.streak >= 5) {
+          setShowStreak(true)
+          setTimeout(() => setShowStreak(false), 1500)
+        }
+        quiz.scheduleAutoAdvance()
+      } else {
+        sounds.playWrong()
+      }
     }
-  }, [
-    quiz.answerState,
-    quiz.mode,
-    quiz.answers,
-    quiz.scheduleAutoAdvance,
-  ])
-
-  useEffect(() => {
-    onSubmitEffect()
-  }, [quiz.answerState, quiz.answers.length])
+  }, [quiz.answers.length])
 
   useEffect(() => {
     if (quiz.isComplete && shellState === "active") {
@@ -161,6 +169,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   return (
     <div className="fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30">
+      <StreakCelebration streak={quiz.streak} show={showStreak} />
       <div className="mx-auto max-w-2xl p-4 sm:p-6">
         <div className="mb-6 flex items-center gap-3">
           <div className="flex-1">
