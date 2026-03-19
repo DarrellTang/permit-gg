@@ -49,7 +49,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Analytics & Progress
 
-- [ ] **ANAL-01**: After each quiz, user sees a summary with score, wrong answers with explanations, and category breakdown
+- [x] **ANAL-01**: After each quiz, user sees a summary with score, wrong answers with explanations, and category breakdown
 - [ ] **ANAL-02**: User has a persistent dashboard showing category mastery scores across all sessions
 - [ ] **ANAL-03**: Dashboard shows trends over time (improving/declining per category)
 - [ ] **ANAL-04**: Dashboard highlights weakest categories with drill recommendations
@@ -131,7 +131,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FLASH-01 | Phase 5 | Pending |
 | FLASH-02 | Phase 5 | Pending |
 | FLASH-03 | Phase 5 | Pending |
-| ANAL-01 | Phase 2 | Pending |
+| ANAL-01 | Phase 2 | Complete |
 | ANAL-02 | Phase 4 | Pending |
 | ANAL-03 | Phase 4 | Pending |
 | ANAL-04 | Phase 4 | Pending |

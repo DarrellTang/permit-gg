@@ -13,7 +13,7 @@ Permit.GG delivers a CA DMV permit test prep app in five phases that follow the 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation + Question Bank** - Project scaffold, database schema, verified seed questions, and base UI shell
-- [ ] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries
+- [x] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries (completed 2026-03-19)
 - [ ] **Phase 3: AI Question Variation Engine** - Batch pre-generation, real-time fallback, and variation pool serving
 - [ ] **Phase 4: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
 - [ ] **Phase 5: Adaptive Learning** - Spaced repetition scheduling, flashcard mode, and missed question review with AI rephrasing
@@ -110,7 +110,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
-| 2. Core Quiz Flow | 2/4 | In Progress|  |
+| 2. Core Quiz Flow | 4/4 | Complete   | 2026-03-19 |
 | 3. AI Question Variation Engine | 0/0 | Not started | - |
 | 4. Analytics + Category Intelligence | 0/0 | Not started | - |
 | 5. Adaptive Learning | 0/0 | Not started | - |
