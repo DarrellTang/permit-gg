@@ -1,3 +1,4 @@
+import Link from "next/link"
 import {
   Card,
   CardContent,
@@ -60,12 +61,12 @@ export default function DashboardPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <button
-              disabled
-              className="rounded-lg bg-neon-cyan/20 px-4 py-2 font-ui text-sm font-semibold text-neon-cyan opacity-60 transition-all"
+            <Link
+              href="/practice"
+              className="inline-block rounded-lg bg-neon-cyan/20 px-4 py-2 font-ui text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/30"
             >
-              Coming Soon
-            </button>
+              Start Practice
+            </Link>
           </CardContent>
         </Card>
 
