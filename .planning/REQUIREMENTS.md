@@ -19,16 +19,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Practice Quiz
 
-- [ ] **QUIZ-01**: User can start a practice quiz with 10-20 mixed-topic questions
-- [ ] **QUIZ-02**: Each practice session serves AI-varied questions so no two sessions feel identical
-- [ ] **QUIZ-03**: User sees one question at a time (no peeking ahead)
+- [x] **QUIZ-01**: User can start a practice quiz with 10-20 mixed-topic questions
+- [x] **QUIZ-02**: Each practice session serves AI-varied questions so no two sessions feel identical
+- [x] **QUIZ-03**: User sees one question at a time (no peeking ahead)
 
 ### Simulated DMV Test
 
-- [ ] **SIM-01**: User can take a simulated DMV test with 46 questions
-- [ ] **SIM-02**: Simulated test uses realistic category distribution matching the actual CA DMV exam
-- [ ] **SIM-03**: User sees pass/fail result at 83% threshold (38/46 correct)
-- [ ] **SIM-04**: User cannot go back to change previous answers (matching real test behavior)
+- [x] **SIM-01**: User can take a simulated DMV test with 46 questions
+- [x] **SIM-02**: Simulated test uses realistic category distribution matching the actual CA DMV exam
+- [x] **SIM-03**: User sees pass/fail result at 83% threshold (38/46 correct)
+- [x] **SIM-04**: User cannot go back to change previous answers (matching real test behavior)
 
 ### Category Drill
 
@@ -54,7 +54,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **ANAL-03**: Dashboard shows trends over time (improving/declining per category)
 - [ ] **ANAL-04**: Dashboard highlights weakest categories with drill recommendations
 - [ ] **ANAL-05**: User sees a readiness prediction score ("X% likely to pass")
-- [ ] **ANAL-06**: All quiz history and progress persists across sessions (stored in Supabase)
+- [x] **ANAL-06**: All quiz history and progress persists across sessions (stored in Supabase)
 
 ### Spaced Repetition
 
@@ -116,13 +116,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | QENG-05 | Phase 3 | Pending |
 | QENG-06 | Phase 1 | Complete |
 | QENG-07 | Phase 2 | Pending |
-| QUIZ-01 | Phase 2 | Pending |
-| QUIZ-02 | Phase 2 | Pending |
-| QUIZ-03 | Phase 2 | Pending |
-| SIM-01 | Phase 2 | Pending |
-| SIM-02 | Phase 2 | Pending |
-| SIM-03 | Phase 2 | Pending |
-| SIM-04 | Phase 2 | Pending |
+| QUIZ-01 | Phase 2 | Complete |
+| QUIZ-02 | Phase 2 | Complete |
+| QUIZ-03 | Phase 2 | Complete |
+| SIM-01 | Phase 2 | Complete |
+| SIM-02 | Phase 2 | Complete |
+| SIM-03 | Phase 2 | Complete |
+| SIM-04 | Phase 2 | Complete |
 | DRILL-01 | Phase 4 | Pending |
 | DRILL-02 | Phase 4 | Pending |
 | MISS-01 | Phase 3 | Pending |
@@ -136,7 +136,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ANAL-03 | Phase 4 | Pending |
 | ANAL-04 | Phase 4 | Pending |
 | ANAL-05 | Phase 4 | Pending |
-| ANAL-06 | Phase 2 | Pending |
+| ANAL-06 | Phase 2 | Complete |
 | SRS-01 | Phase 5 | Pending |
 | SRS-02 | Phase 5 | Pending |
 | SRS-03 | Phase 5 | Pending |

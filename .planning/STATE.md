@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-19T02:26:17.327Z"
-last_activity: 2026-03-18 -- Completed plan 01-04 (Phase 1 complete)
+status: in_progress
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-19T03:07:45Z"
+last_activity: 2026-03-19 -- Completed plan 02-01 (Quiz engine foundation)
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 4
-  completed_plans: 4
-  percent: 100
+  completed_plans: 1
+  percent: 25
 ---
 
 # Project State
@@ -21,36 +21,37 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** Dynamic question variation powered by AI ensures users learn the material rather than memorize specific Q&A pairs, while category-based analytics identify exactly where to focus study time.
-**Current focus:** Phase 1: Foundation + Question Bank
+**Current focus:** Phase 2: Core Quiz Flow
 
 ## Current Position
 
-Phase: 1 of 5 (Foundation + Question Bank) -- COMPLETE
-Plan: 4 of 4 in current phase (all complete)
-Status: Phase 1 complete, ready for Phase 2
-Last activity: 2026-03-18 -- Completed plan 01-04 (Phase 1 complete)
+Phase: 2 of 5 (Core Quiz Flow)
+Plan: 1 of 4 in current phase
+Status: Plan 02-01 complete, ready for Plan 02-02
+Last activity: 2026-03-19 -- Completed plan 02-01 (Quiz engine foundation)
 
-Progress: [██████████] 100%
+Progress: [███-------] 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 9min
-- Total execution time: 0.43 hours
+- Total plans completed: 4
+- Average duration: 8min
+- Total execution time: 0.50 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3 | 26min | 9min |
+| 2 | 1 | 5min | 5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (7min), 01-03 (3min), 01-02 (16min)
-- Trend: stable
+- Last 5 plans: 01-01 (7min), 01-03 (3min), 01-02 (16min), 01-04 (3min), 02-01 (5min)
+- Trend: improving
 
 *Updated after each plan completion*
-| Phase 01 P04 | 3min | 2 tasks | 9 files |
+| Phase 02 P01 | 5min | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,9 @@ Recent decisions affecting current work:
 - [Phase 01]: Deleted root page.tsx redirect; (marketing) route group serves root URL
 - [Phase 01]: SVG mascot uses inline theme CSS variables for neon color integration
 - [Phase 01]: Excluded scripts/ from tsconfig to fix pre-existing ES2017 regex flag incompatibility
+- [Phase 02]: Used floor-then-distribute-remainder for sim question allocation to guarantee exactly 46 questions
+- [Phase 02]: Sim mode auto-advances on submit (no reveal), practice mode shows reveal with explanation
+- [Phase 02]: PreparedQuestion pre-shuffles answer options at load time to avoid shuffle-in-render-path
 
 ### Pending Todos
 
@@ -80,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T02:26:17.321Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-core-quiz-flow/02-CONTEXT.md
+Last session: 2026-03-19T03:07:45Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-core-quiz-flow/02-02-PLAN.md

@@ -50,7 +50,7 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Quiz engine foundation: types, DB migration, Zustand store, question selection, test scaffolds
+- [x] 02-01-PLAN.md — Quiz engine foundation: types, DB migration, Zustand store, question selection, test scaffolds
 - [ ] 02-02-PLAN.md — Practice quiz UI: shared components, answer feedback, celebrations, sound FX, persistence
 - [ ] 02-03-PLAN.md — Simulated DMV test: flag-for-review, no-feedback mode, DMV letter-style result
 - [ ] 02-04-PLAN.md — Post-quiz summary: animated score, wrong answer carousel, radar chart, smart actions
@@ -110,7 +110,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
-| 2. Core Quiz Flow | 0/4 | In Progress | - |
+| 2. Core Quiz Flow | 1/4 | In Progress | - |
 | 3. AI Question Variation Engine | 0/0 | Not started | - |
 | 4. Analytics + Category Intelligence | 0/0 | Not started | - |
 | 5. Adaptive Learning | 0/0 | Not started | - |
