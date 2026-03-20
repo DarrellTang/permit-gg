@@ -143,6 +143,38 @@ html.dark {
   }
 }
 
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 15px oklch(from var(--neon-pink) l c h / 0.4)); }
+  50% { filter: drop-shadow(0 0 25px oklch(from var(--neon-pink) l c h / 0.8)); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(400%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-scanline {
+  animation: scanline 4s linear infinite;
+  background: linear-gradient(to bottom, transparent, oklch(from var(--neon-cyan) l c h / 0.2), transparent);
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
 .neon-glow {
   box-shadow:
     0 0 10px var(--neon-pink),
