@@ -45,8 +45,8 @@ playwright-cli goto "$BASE" > /dev/null 2>&1
 sleep 2
 SNAP=$(get_snapshot)
 check "Landing page loads" "$(echo "$SNAP" | grep -q 'PERMIT.GG' && echo true || echo false)"
-check "Hero heading exists" "$(echo "$SNAP" | grep -q 'Crush' && echo true || echo false)"
-check "Start Studying CTA exists" "$(echo "$SNAP" | grep -q 'Start Studying' && echo true || echo false)"
+check "Hero heading exists" "$(echo "$SNAP" | grep -q 'DOMINATE' && echo true || echo false)"
+check "Start Your Quest CTA exists" "$(echo "$SNAP" | grep -q 'START YOUR QUEST' && echo true || echo false)"
 playwright-cli screenshot --filename="$SCREENSHOTS/landing.png" > /dev/null 2>&1
 
 echo ""
