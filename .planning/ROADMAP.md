@@ -14,6 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation + Question Bank** - Project scaffold, database schema, verified seed questions, and base UI shell
 - [x] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries (completed 2026-03-19)
+- [ ] **Phase 2.1: Auth, Profiles & Instrumentation** - INSERTED — Supabase Auth, user profiles with Stripe/tier columns, PostHog analytics, user-scoped data
 - [ ] **Phase 3: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
 - [ ] **Phase 4: AI Question Variation Engine** - Analytics-targeted AI variation generation for weak areas, real-time fallback, missed question tracking
 - [ ] **Phase 5: Adaptive Learning** - Spaced repetition scheduling, flashcard mode, and missed question review with AI rephrasing
@@ -54,6 +55,24 @@ Plans:
 - [x] 02-02-PLAN.md — Practice quiz UI: shared components, answer feedback, celebrations, sound FX, persistence
 - [x] 02-03-PLAN.md — Simulated DMV test: flag-for-review, no-feedback mode, DMV letter-style result
 - [x] 02-04-PLAN.md — Post-quiz summary: animated score, wrong answer carousel, radar chart, smart actions
+
+### Phase 2.1: Auth, Profiles & Instrumentation (INSERTED)
+**Goal**: Multi-user support with Supabase Auth, user profiles with future-proof Stripe/tier columns, PostHog product analytics, and user-scoped quiz data
+**Depends on**: Phase 2
+**Requirements**: (infrastructure — no user-facing requirement IDs, enables MULTI-01/02 from v2)
+**Success Criteria** (what must be TRUE):
+  1. User can sign up and log in with email/password
+  2. All quiz sessions are scoped to the authenticated user (user_id FK)
+  3. Profiles table exists with stripe_customer_id and tier columns (defaulting to 'free')
+  4. Unauthenticated users are redirected to login when accessing /dashboard or quiz routes
+  5. PostHog tracks page views and identifies authenticated users
+  6. RLS policies enforce user-scoped data access
+  7. Existing Lilly quiz data is preserved (migration backfills her user_id)
+**Plans**: TBD
+
+Plans:
+- [ ] 02.1-01: TBD
+- [ ] 02.1-02: TBD
 
 ### Phase 3: Analytics + Category Intelligence
 **Goal**: Users can see exactly where they are strong and weak, with data-driven recommendations that connect insight to targeted practice
@@ -106,12 +125,13 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
+Phases execute in numeric order: 1 -> 2 -> 2.1 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
-| 2. Core Quiz Flow | 4/4 | Complete   | 2026-03-19 |
+| 2. Core Quiz Flow | 4/4 | Complete | 2026-03-19 |
+| 2.1. Auth, Profiles & Instrumentation | 0/0 | Not started | - |
 | 3. Analytics + Category Intelligence | 0/0 | Not started | - |
 | 4. AI Question Variation Engine | 0/0 | Not started | - |
 | 5. Adaptive Learning | 0/0 | Not started | - |
