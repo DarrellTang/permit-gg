@@ -29,7 +29,7 @@ export function AnswerFeedback({
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="overflow-hidden"
     >
-      <div className="mt-4 rounded-xl border border-border/60 bg-muted/30 p-4">
+      <div className="mt-4 rounded-xl glass ghost-border p-4">
         <p className="font-body text-sm leading-relaxed text-foreground/90">
           {explanation}
         </p>

@@ -39,6 +39,13 @@
   --color-neon-pink: var(--neon-pink);
   --color-neon-purple: var(--neon-purple);
   --color-neon-cyan: var(--neon-cyan);
+  --color-neon-mint: var(--neon-mint);
+  --color-neon-lavender: var(--neon-lavender);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
   --font-display: var(--font-orbitron);
   --font-ui: var(--font-chakra);
   --font-body: var(--font-inter);
@@ -88,11 +95,18 @@
   --neon-pink: oklch(0.50 0.28 340);
   --neon-purple: oklch(0.40 0.22 300);
   --neon-cyan: oklch(0.45 0.15 195);
+  --neon-mint: #a9ffde;
+  --neon-lavender: #eab2ff;
+  --surface-container-lowest: #f0eaf5;
+  --surface-container-low: #f5f0fa;
+  --surface-container: #f8f4fc;
+  --surface-container-high: #faf7fd;
+  --surface-container-highest: #fdfbfe;
 }
 
 /* DARK MODE IS PRIMARY -- html.dark overrides :root */
 html.dark {
-  --background: oklch(0.13 0.01 280);
+  --background: #190f23;
   --foreground: oklch(0.95 0.01 280);
   --primary: oklch(0.65 0.28 340);
   --primary-foreground: oklch(0.98 0 0);
@@ -126,7 +140,14 @@ html.dark {
   --sidebar-ring: oklch(0.65 0.28 340);
   --neon-pink: oklch(0.70 0.30 340);
   --neon-purple: oklch(0.60 0.28 300);
-  --neon-cyan: oklch(0.80 0.18 195);
+  --neon-cyan: #a9ffde;
+  --neon-mint: #a9ffde;
+  --neon-lavender: #eab2ff;
+  --surface-container-lowest: #130a1d;
+  --surface-container-low: #21172b;
+  --surface-container: #251b30;
+  --surface-container-high: #30263b;
+  --surface-container-highest: #3b3046;
 }
 
 @layer base {
@@ -185,4 +206,39 @@ html.dark {
   text-shadow:
     0 0 8px var(--neon-pink),
     0 0 20px var(--neon-purple);
+}
+
+.glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: color-mix(in srgb, var(--surface-container) 80%, transparent);
+}
+
+.bloom-hover {
+  transition: box-shadow 0.2s ease;
+}
+.bloom-hover:hover {
+  box-shadow: 0 0 20px 2px rgba(255, 174, 216, 0.4);
+}
+
+.ghost-border {
+  border: 1px solid color-mix(in srgb, var(--border) 15%, transparent);
+}
+
+@keyframes data-leak-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.data-leak {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--neon-pink) 8%, transparent) 25%,
+    color-mix(in srgb, var(--neon-cyan) 8%, transparent) 50%,
+    color-mix(in srgb, var(--neon-lavender) 8%, transparent) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: data-leak-sweep 8s linear infinite;
 }

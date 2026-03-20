@@ -7,7 +7,7 @@ import { PageTransition } from "./page-transition"
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-border/60">
+      <aside className="hidden lg:flex lg:w-64 lg:flex-col">
         <Sidebar />
       </aside>
 

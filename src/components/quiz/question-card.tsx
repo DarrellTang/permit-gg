@@ -49,7 +49,7 @@ export function QuestionCard({
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="space-y-4"
       >
-        <div className="rounded-xl border border-border/40 bg-card/80 p-5">
+        <div className="rounded-xl bg-[var(--surface-container-low)] ghost-border p-5">
           <div className="mb-2 flex items-center gap-2">
             <span className="font-ui text-xs text-muted-foreground">
               Q{questionIndex + 1}

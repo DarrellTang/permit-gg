@@ -42,7 +42,7 @@ export function QuizProgressBar({
         )}
       </div>
 
-      <div className="relative h-3 overflow-hidden rounded-full bg-muted">
+      <div className="relative h-3 overflow-hidden rounded-full bg-[var(--surface-container-lowest)]">
         {/* Question progress — fills as you answer questions */}
         <motion.div
           className="absolute inset-y-0 left-0 rounded-full bg-muted-foreground/20"

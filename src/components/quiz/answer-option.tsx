@@ -58,26 +58,26 @@ export function AnswerOption({
           : {}
       }
       className={cn(
-        "flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left font-body text-sm transition-all duration-200",
+        "flex min-h-[56px] w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-body text-sm transition-all duration-200",
         variant === "idle" &&
-          "cursor-pointer border-border bg-card hover:border-neon-purple/50 hover:bg-neon-purple/10 hover:shadow-[0_0_16px_var(--neon-purple)/0.15] hover:scale-[1.01] active:scale-[0.99]",
+          "cursor-pointer border-0 bg-[var(--surface-container-low)] hover:bg-[var(--surface-container-high)] hover:shadow-[0_0_20px_2px_rgba(234,178,255,0.3)] hover:scale-[1.01] active:scale-[0.99]",
         variant === "selected" &&
-          "cursor-pointer border-neon-cyan bg-neon-cyan/10 shadow-[0_0_16px_var(--neon-cyan)/0.25]",
+          "cursor-pointer border-0 bg-neon-cyan/10 shadow-[0_0_16px_2px_rgba(169,255,222,0.3)]",
         variant === "correct" &&
-          "border-green-500 bg-green-500/15 text-green-400",
+          "border-2 border-green-500 bg-green-500/15 text-green-400",
         variant === "wrong" &&
-          "border-red-500 bg-red-500/15 text-red-400",
-        variant === "dimmed" && "border-border/50 bg-card/50 opacity-50"
+          "border-2 border-red-500 bg-red-500/15 text-red-400",
+        variant === "dimmed" && "border-0 bg-[var(--surface-container-lowest)] opacity-50"
       )}
     >
       <span
         className={cn(
           "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg font-ui text-xs font-bold",
-          variant === "idle" && "bg-muted text-muted-foreground",
+          variant === "idle" && "bg-[var(--surface-container)] text-muted-foreground",
           variant === "selected" && "bg-neon-cyan/20 text-neon-cyan",
           variant === "correct" && "bg-green-500/20 text-green-400",
           variant === "wrong" && "bg-red-500/20 text-red-400",
-          variant === "dimmed" && "bg-muted/50 text-muted-foreground/50"
+          variant === "dimmed" && "bg-[var(--surface-container-lowest)] text-muted-foreground/50"
         )}
       >
         {variant === "correct" ? (

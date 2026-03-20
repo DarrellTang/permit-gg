@@ -64,7 +64,7 @@ export function BottomTabs() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border/60 bg-card/95 backdrop-blur-sm lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 bg-[var(--surface-container)]/80 backdrop-blur-[16px] lg:hidden">
       <nav className="flex items-stretch justify-around pb-[env(safe-area-inset-bottom)]">
         {TAB_ITEMS.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
@@ -72,9 +72,9 @@ export function BottomTabs() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex min-h-[56px] min-w-[56px] flex-1 flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] font-ui font-medium transition-colors ${
+              className={`flex min-h-[56px] min-w-[56px] flex-1 flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] font-ui font-medium transition-all ${
                 isActive
-                  ? "text-neon-pink"
+                  ? "text-neon-pink drop-shadow-[0_0_10px_rgba(255,174,216,0.5)]"
                   : "text-muted-foreground active:text-foreground"
               }`}
             >

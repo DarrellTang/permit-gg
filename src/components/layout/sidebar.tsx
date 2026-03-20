@@ -65,7 +65,7 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="flex h-full w-64 flex-col border-r border-border/60 bg-card/80">
+    <div className="flex h-full w-64 flex-col bg-[var(--surface-container)]/80 backdrop-blur-[16px]">
       <div className="flex h-16 items-center px-6">
         <Link href="/dashboard" className="font-display text-xl font-bold tracking-wider text-neon-pink neon-text">
           PERMIT.GG
@@ -81,8 +81,8 @@ export function Sidebar() {
               href={item.href}
               className={`group flex items-center gap-3 rounded-lg px-3 py-2.5 font-ui text-sm font-medium transition-all ${
                 isActive
-                  ? "border-l-2 border-neon-pink bg-neon-pink/10 text-neon-pink"
-                  : "border-l-2 border-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground hover:shadow-[0_0_8px_var(--neon-purple)/0.15]"
+                  ? "bg-neon-pink/10 text-neon-pink shadow-[0_-2px_0_0_var(--neon-pink)_inset] shadow-neon-pink/60"
+                  : "text-muted-foreground hover:bg-[var(--surface-container-high)] hover:text-foreground"
               }`}
             >
               <span className={`transition-colors ${isActive ? "text-neon-pink" : "text-muted-foreground group-hover:text-foreground"}`}>
@@ -94,10 +94,10 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="flex items-center justify-between border-t border-border/60 px-4 py-3">
+      <div className="flex items-center justify-between bg-[var(--surface-container-low)] px-4 py-3">
         <ThemeToggle />
         <button
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-[var(--surface-container-high)] hover:text-foreground"
           aria-label="Settings"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">

@@ -55,7 +55,7 @@ export function WrongAnswerCarousel({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.4 }}
-        className="rounded-xl border border-neon-cyan/30 bg-neon-cyan/5 p-8 text-center"
+        className="rounded-xl bg-[var(--surface-container-low)] ghost-border p-8 text-center"
       >
         <div className="font-display text-4xl">100%</div>
         <p className="mt-2 font-display text-xl font-bold text-neon-cyan">
@@ -124,7 +124,7 @@ export function WrongAnswerCarousel({
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 className="cursor-grab active:cursor-grabbing"
               >
-                <div className="rounded-xl border border-neon-pink/20 bg-gradient-to-b from-card to-card/80 p-5 shadow-lg shadow-neon-pink/5">
+                <div className="rounded-xl bg-[var(--surface-container-low)] ghost-border p-5">
                   <div className="mb-3 flex items-center gap-2">
                     <span className="font-ui text-xs font-bold text-muted-foreground">
                       Q{questions.findIndex((q) => q.id === answer.questionId) + 1}

@@ -115,7 +115,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   if (shellState === "pre-start") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-background to-muted/30 p-6">
+      <div className="flex min-h-screen items-center justify-center bg-background p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,11 +153,11 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   if (shellState === "loading") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-background to-muted/30">
+      <div className="flex min-h-screen items-center justify-center bg-background">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center"
+          className="glass rounded-2xl px-12 py-10 text-center"
         >
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-neon-cyan border-t-transparent" />
           <p className="mt-4 font-ui text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   if (shellState === "complete") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-background to-muted/30 p-6">
+      <div className="flex min-h-screen items-center justify-center bg-background p-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -197,7 +197,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   if (quiz.mode === "sim" && quiz.reviewingFlagged) {
     return (
-      <div className="min-h-screen overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30">
+      <div className="min-h-screen overflow-y-auto bg-background">
         <FlaggedReview
           onNavigateToQuestion={quiz.handleNavigateToFlagged}
           onSubmitTest={handleSimSubmit}
@@ -216,7 +216,7 @@ export function QuizShell({ mode }: QuizShellProps) {
 
   return (
     <div
-      className={`min-h-screen overflow-y-auto bg-gradient-to-b from-background via-background to-muted/30 ${
+      className={`min-h-screen overflow-y-auto bg-background ${
         mode === "sim" ? "ring-2 ring-inset ring-neon-purple/30" : ""
       }`}
     >

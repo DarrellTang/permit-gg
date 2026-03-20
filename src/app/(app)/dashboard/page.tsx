@@ -14,13 +14,14 @@ export default function DashboardPage() {
         <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan lg:text-4xl">
           Welcome to PERMIT.GG
         </h1>
+        <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; Your journey starts here</p>
         <p className="font-ui text-base text-muted-foreground">
           Your CA permit test prep starts here
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card className="group transition-all hover:shadow-[0_0_20px_var(--neon-pink)/0.15] hover:ring-neon-pink/30">
+        <Card className="group border-0 bg-[var(--surface-container-low)] transition-all hover:bg-[var(--surface-container-high)] hover:shadow-[0_-2px_0_0_var(--neon-pink),0_0_20px_2px_rgba(255,174,216,0.15)]">
           <CardHeader>
             <CardTitle className="font-ui text-lg">
               <span className="mr-2 inline-block text-2xl">
@@ -28,7 +29,7 @@ export default function DashboardPage() {
                   <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
                 </svg>
               </span>
-              Readiness Score
+              &#10022; Readiness Score
             </CardTitle>
             <CardDescription className="font-body">
               How prepared are you for the real test?
@@ -46,7 +47,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="group transition-all hover:shadow-[0_0_20px_var(--neon-cyan)/0.15] hover:ring-neon-cyan/30">
+        <Card className="group border-0 bg-[var(--surface-container-low)] transition-all hover:bg-[var(--surface-container-high)] hover:shadow-[0_-2px_0_0_var(--neon-cyan),0_0_20px_2px_rgba(169,255,222,0.15)]">
           <CardHeader>
             <CardTitle className="font-ui text-lg">
               <span className="mr-2 inline-block">
@@ -54,7 +55,7 @@ export default function DashboardPage() {
                   <polygon points="6 3 20 12 6 21 6 3" />
                 </svg>
               </span>
-              Quick Practice
+              &#10022; Quick Practice
             </CardTitle>
             <CardDescription className="font-body">
               Jump into a practice quiz with mixed topics
@@ -70,7 +71,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="group transition-all hover:shadow-[0_0_20px_var(--neon-purple)/0.15] hover:ring-neon-purple/30">
+        <Card className="group border-0 bg-[var(--surface-container-low)] transition-all hover:bg-[var(--surface-container-high)] hover:shadow-[0_-2px_0_0_var(--neon-purple),0_0_20px_2px_rgba(234,178,255,0.15)]">
           <CardHeader>
             <CardTitle className="font-ui text-lg">
               <span className="mr-2 inline-block">
@@ -80,7 +81,7 @@ export default function DashboardPage() {
                   <path d="m9 14 2 2 4-4" />
                 </svg>
               </span>
-              Simulated Test
+              &#10022; Simulated Test
             </CardTitle>
             <CardDescription className="font-body">
               46 questions, just like the real DMV test
@@ -96,7 +97,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="group transition-all hover:shadow-[0_0_20px_var(--neon-pink)/0.15] hover:ring-neon-pink/30">
+        <Card className="group border-0 bg-[var(--surface-container-low)] transition-all hover:bg-[var(--surface-container-high)] hover:shadow-[0_-2px_0_0_var(--neon-pink),0_0_20px_2px_rgba(255,174,216,0.15)]">
           <CardHeader>
             <CardTitle className="font-ui text-lg">
               <span className="mr-2 inline-block">
@@ -105,7 +106,7 @@ export default function DashboardPage() {
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
               </span>
-              Recent Activity
+              &#10022; Recent Activity
             </CardTitle>
             <CardDescription className="font-body">
               Your latest quiz results and progress

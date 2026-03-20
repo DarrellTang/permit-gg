@@ -38,7 +38,7 @@ export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
     >
       {weakest && (
         <Link href="/practice" data-category={weakest.categorySlug}>
-          <div className="relative overflow-hidden rounded-xl border-2 border-neon-pink/40 bg-gradient-to-r from-neon-pink/5 to-neon-purple/5 p-4 transition-all hover:border-neon-pink/60 hover:shadow-lg hover:shadow-neon-pink/10">
+          <div className="relative overflow-hidden rounded-xl bg-[var(--surface-container-low)] ghost-border p-4 transition-all bloom-hover">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <svg
@@ -77,7 +77,7 @@ export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
           <Button
             variant="outline"
             size="lg"
-            className="h-12 w-full font-ui text-sm"
+            className="h-12 w-full font-ui text-sm ghost-border border-0 bg-[var(--surface-container-low)] hover:bg-[var(--surface-container-high)]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
           <Button
             variant="outline"
             size="lg"
-            className="h-12 w-full font-ui text-sm"
+            className="h-12 w-full font-ui text-sm ghost-border border-0 bg-[var(--surface-container-low)] hover:bg-[var(--surface-container-high)]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

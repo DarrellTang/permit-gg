@@ -18,7 +18,7 @@ export function DmvResultLetter({
   const passed = score >= DMV_CONFIG.passingScore
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-background to-muted/30 p-6">
+    <div className="flex min-h-screen items-center justify-center bg-background p-6">
       <motion.div
         initial={{ opacity: 0, y: 80, rotate: -2 }}
         animate={{ opacity: 1, y: 0, rotate: 0 }}
@@ -29,7 +29,7 @@ export function DmvResultLetter({
         }}
         className="w-full max-w-lg"
       >
-        <div className="rounded-xl border border-border/60 bg-[#faf9f6] dark:bg-[#1a1a1a] p-8 shadow-2xl">
+        <div className="rounded-xl glass ghost-border bg-[#faf9f6] dark:bg-[var(--surface-container)]/90 p-8">
           <div className="space-y-6 text-center">
             <div className="space-y-1">
               <p className="font-display text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
@@ -40,7 +40,7 @@ export function DmvResultLetter({
               </p>
             </div>
 
-            <div className="border-y border-border/40 py-4">
+            <div className="border-y border-[var(--border)]/15 py-4">
               <h1 className="font-display text-lg font-bold uppercase tracking-wider text-foreground">
                 Knowledge Test Results
               </h1>
