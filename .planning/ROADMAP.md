@@ -2,7 +2,7 @@
 
 ## Overview
 
-Permit.GG delivers a CA DMV permit test prep app in five phases that follow the dependency chain: data foundation, quiz engine, AI variation engine, analytics intelligence, and adaptive learning. Each phase produces a usable, testable capability -- Phase 2 alone delivers a functional (if static) quiz app. The AI differentiator layers on in Phase 3, analytics makes studying strategic in Phase 4, and spaced repetition ties everything into an optimal learning system in Phase 5.
+Permit.GG delivers a CA DMV permit test prep app in five phases that follow the dependency chain: data foundation, quiz engine, analytics intelligence, targeted AI variation, and adaptive learning. Each phase produces a usable, testable capability — Phase 2 alone delivers a functional quiz app (shipped as MVP). Analytics (Phase 3) makes studying strategic, then AI variation (Phase 4) targets weak areas with fresh questions to prevent memorization. Spaced repetition ties everything into an optimal learning system in Phase 5.
 
 ## Phases
 
@@ -14,8 +14,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation + Question Bank** - Project scaffold, database schema, verified seed questions, and base UI shell
 - [x] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries (completed 2026-03-19)
-- [ ] **Phase 3: AI Question Variation Engine** - Batch pre-generation, real-time fallback, and variation pool serving
-- [ ] **Phase 4: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
+- [ ] **Phase 3: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
+- [ ] **Phase 4: AI Question Variation Engine** - Analytics-targeted AI variation generation for weak areas, real-time fallback, missed question tracking
 - [ ] **Phase 5: Adaptive Learning** - Spaced repetition scheduling, flashcard mode, and missed question review with AI rephrasing
 
 ## Phase Details
@@ -51,35 +51,36 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Quiz engine foundation: types, DB migration, Zustand store, question selection, test scaffolds
-- [ ] 02-02-PLAN.md — Practice quiz UI: shared components, answer feedback, celebrations, sound FX, persistence
-- [ ] 02-03-PLAN.md — Simulated DMV test: flag-for-review, no-feedback mode, DMV letter-style result
-- [ ] 02-04-PLAN.md — Post-quiz summary: animated score, wrong answer carousel, radar chart, smart actions
+- [x] 02-02-PLAN.md — Practice quiz UI: shared components, answer feedback, celebrations, sound FX, persistence
+- [x] 02-03-PLAN.md — Simulated DMV test: flag-for-review, no-feedback mode, DMV letter-style result
+- [x] 02-04-PLAN.md — Post-quiz summary: animated score, wrong answer carousel, radar chart, smart actions
 
-### Phase 3: AI Question Variation Engine
-**Goal**: Every quiz session serves AI-generated variations of seed questions so no two sessions feel identical, with missed questions tracked for future review
-**Depends on**: Phase 2
-**Requirements**: QENG-03, QENG-04, QENG-05, MISS-01
-**Success Criteria** (what must be TRUE):
-  1. User sees differently-phrased versions of questions across sessions (same concept, different wording) rather than identical repeats
-  2. Pre-generated variation pool (3-5 per seed via Claude Batch API) serves 95%+ of questions without real-time API calls
-  3. When the pre-generated pool is depleted for a given seed, a real-time variation is generated transparently
-  4. System tracks all incorrectly answered questions per user for future review sessions
-**Plans**: TBD
-
-Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
-
-### Phase 4: Analytics + Category Intelligence
+### Phase 3: Analytics + Category Intelligence
 **Goal**: Users can see exactly where they are strong and weak, with data-driven recommendations that connect insight to targeted practice
-**Depends on**: Phase 3
-**Requirements**: ANAL-02, ANAL-03, ANAL-04, ANAL-05, DRILL-01, DRILL-02
+**Depends on**: Phase 2
+**Requirements**: ANAL-02, ANAL-03, ANAL-04, ANAL-05, DRILL-01, DRILL-02, MISS-01
 **Success Criteria** (what must be TRUE):
   1. User sees a persistent dashboard showing category mastery scores aggregated across all quiz sessions
   2. Dashboard shows trend lines per category (improving/declining over time)
   3. Dashboard highlights weakest categories and recommends specific categories to drill
   4. User can select a specific category and practice only questions from that category
   5. User sees a readiness prediction score ("X% likely to pass") based on their overall performance
+  6. System tracks all incorrectly answered questions per user for future review sessions
+**Plans**: TBD
+
+Plans:
+- [ ] 03-01: TBD
+- [ ] 03-02: TBD
+
+### Phase 4: AI Question Variation Engine
+**Goal**: Analytics-informed AI generates question variations targeted at weak categories, preventing memorization where it matters most while minimizing API costs
+**Depends on**: Phase 3
+**Requirements**: QENG-03, QENG-04, QENG-05
+**Success Criteria** (what must be TRUE):
+  1. User sees differently-phrased versions of questions in weak categories across sessions (same concept, different wording)
+  2. AI variation generation is targeted — only generates for categories where analytics show weakness or high repetition
+  3. When a question has been seen 3+ times in a weak category, a variation is generated on-demand via Claude API
+  4. Generated variations preserve factual accuracy (correct answer unchanged, wrong answers plausible)
 **Plans**: TBD
 
 Plans:
@@ -111,6 +112,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
 | 2. Core Quiz Flow | 4/4 | Complete   | 2026-03-19 |
-| 3. AI Question Variation Engine | 0/0 | Not started | - |
-| 4. Analytics + Category Intelligence | 0/0 | Not started | - |
+| 3. Analytics + Category Intelligence | 0/0 | Not started | - |
+| 4. AI Question Variation Engine | 0/0 | Not started | - |
 | 5. Adaptive Learning | 0/0 | Not started | - |

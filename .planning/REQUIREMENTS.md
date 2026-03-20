@@ -111,9 +111,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | QENG-01 | Phase 1 | Complete |
 | QENG-02 | Phase 1 | Complete |
-| QENG-03 | Phase 3 | Pending |
-| QENG-04 | Phase 3 | Pending |
-| QENG-05 | Phase 3 | Pending |
+| QENG-03 | Phase 4 | Pending |
+| QENG-04 | Phase 4 | Pending |
+| QENG-05 | Phase 4 | Pending |
 | QENG-06 | Phase 1 | Complete |
 | QENG-07 | Phase 2 | Complete |
 | QUIZ-01 | Phase 2 | Complete |
@@ -123,8 +123,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SIM-02 | Phase 2 | Complete |
 | SIM-03 | Phase 2 | Complete |
 | SIM-04 | Phase 2 | Complete |
-| DRILL-01 | Phase 4 | Pending |
-| DRILL-02 | Phase 4 | Pending |
+| DRILL-01 | Phase 3 | Pending |
+| DRILL-02 | Phase 3 | Pending |
 | MISS-01 | Phase 3 | Pending |
 | MISS-02 | Phase 5 | Pending |
 | MISS-03 | Phase 5 | Pending |
@@ -132,10 +132,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FLASH-02 | Phase 5 | Pending |
 | FLASH-03 | Phase 5 | Pending |
 | ANAL-01 | Phase 2 | Complete |
-| ANAL-02 | Phase 4 | Pending |
-| ANAL-03 | Phase 4 | Pending |
-| ANAL-04 | Phase 4 | Pending |
-| ANAL-05 | Phase 4 | Pending |
+| ANAL-02 | Phase 3 | Pending |
+| ANAL-03 | Phase 3 | Pending |
+| ANAL-04 | Phase 3 | Pending |
+| ANAL-05 | Phase 3 | Pending |
 | ANAL-06 | Phase 2 | Complete |
 | SRS-01 | Phase 5 | Pending |
 | SRS-02 | Phase 5 | Pending |
