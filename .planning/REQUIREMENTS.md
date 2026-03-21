@@ -74,9 +74,9 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ### Multi-User
 
-- **MULTI-01**: User can create an account and log in
-- **MULTI-02**: Multiple users can use the app independently with separate progress
-- **MULTI-03**: Classmates can be invited to join
+- [x] **MULTI-01**: User can create an account and log in
+- [x] **MULTI-02**: Multiple users can use the app independently with separate progress
+- [ ] **MULTI-03**: Classmates can be invited to join
 
 ### Extended Content
 

@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 2.1 context gathered
-last_updated: "2026-03-20T05:00:03.010Z"
-last_activity: 2026-03-19 -- Completed plan 02-04 (Post-quiz summary screen)
+status: in-progress
+stopped_at: Completed 2.1-01-PLAN.md
+last_updated: "2026-03-21T06:27:00.000Z"
+last_activity: 2026-03-21 -- Completed plan 2.1-01 (Auth infrastructure)
 progress:
   total_phases: 6
   completed_phases: 2
@@ -21,23 +21,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** Dynamic question variation powered by AI ensures users learn the material rather than memorize specific Q&A pairs, while category-based analytics identify exactly where to focus study time.
-**Current focus:** Phase 2: Core Quiz Flow
+**Current focus:** Phase 2.1: Auth, Profiles & Instrumentation
 
 ## Current Position
 
-Phase: 2 of 5 (Core Quiz Flow)
-Plan: 4 of 4 in current phase (PHASE COMPLETE)
-Status: Phase 2 complete, ready for Phase 3
-Last activity: 2026-03-19 -- Completed plan 02-04 (Post-quiz summary screen)
+Phase: 2.1 (Auth, Profiles & Instrumentation)
+Plan: 1 of N in current phase
+Status: Plan 2.1-01 complete, continuing phase 2.1
+Last activity: 2026-03-21 -- Completed plan 2.1-01 (Auth infrastructure)
 
-Progress: [██████████] 100%
+Progress: [██████████] 100% (phases 1-2) + 2.1 in progress
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 6min
-- Total execution time: 0.73 hours
+- Total execution time: 0.82 hours
 
 **By Phase:**
 
@@ -45,9 +45,10 @@ Progress: [██████████] 100%
 |-------|-------|-------|----------|
 | 1 | 4 | 26min | 7min |
 | 2 | 4 | 20min | 5min |
+| 2.1 | 1 | 5min | 5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-04 (3min), 02-01 (5min), 02-02 (6min), 02-03 (5min), 02-04 (4min)
+- Last 5 plans: 02-01 (5min), 02-02 (6min), 02-03 (5min), 02-04 (4min), 2.1-01 (5min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -55,6 +56,7 @@ Progress: [██████████] 100%
 | Phase 02 P02 | 6min | 3 tasks | 22 files |
 | Phase 02 P03 | 5min | 3 tasks | 12 files |
 | Phase 02 P04 | 4min | 3 tasks | 12 files |
+| Phase 2.1 P01 | 5min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -85,6 +87,10 @@ Recent decisions affecting current work:
 - [Phase 02]: Recharts downgraded from v3.8 to v2.15 for shadcn chart component compatibility
 - [Phase 02]: Short category names for radar chart mobile readability per research pitfall #6
 - [Phase 02]: Sim summary auto-shows full results after 3s with manual View Full Results button
+- [Phase 2.1]: getClaims() over getUser() in middleware for local JWT validation performance
+- [Phase 2.1]: Nullable user_id on quiz tables to support free quiz for unauthenticated users
+- [Phase 2.1]: Separate anon RLS INSERT policies with user_id IS NULL check for free quiz data
+- [Phase 2.1]: Suspense boundary wrapping useSearchParams on login page for Next.js SSG compatibility
 
 ### Pending Todos
 
@@ -96,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20T05:00:03.000Z
-Stopped at: Phase 2.1 context gathered
-Resume file: .planning/phases/2.1-auth-profiles-instrumentation-inserted/2.1-CONTEXT.md
+Last session: 2026-03-21T06:27:00.000Z
+Stopped at: Completed 2.1-01-PLAN.md
+Resume file: .planning/phases/2.1-auth-profiles-instrumentation-inserted/2.1-01-SUMMARY.md
