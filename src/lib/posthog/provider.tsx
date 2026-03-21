@@ -1,29 +1,28 @@
 "use client"
 
 import posthog from "posthog-js"
-import { PostHogProvider as PHProvider } from "posthog-js/react"
-
-const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY
-const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST
-
-if (typeof window !== "undefined" && POSTHOG_KEY) {
-  posthog.init(POSTHOG_KEY, {
-    api_host: "/ingest",
-    ui_host: POSTHOG_HOST,
-    person_profiles: "identified_only",
-    capture_exceptions: true,
-    loaded: (ph) => {
-      if (process.env.NODE_ENV === "development") {
-        ph.debug()
-      }
-    },
-  })
-}
+import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react"
+import { useEffect, useRef } from "react"
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
-  if (!POSTHOG_KEY) {
-    return <>{children}</>
-  }
+  const initialized = useRef(false)
+
+  useEffect(() => {
+    if (initialized.current) return
+
+    const key = process.env.NEXT_PUBLIC_POSTHOG_KEY
+    if (!key) return
+
+    posthog.init(key, {
+      api_host: "/ingest",
+      ui_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      person_profiles: "identified_only",
+      capture_exceptions: true,
+      debug: process.env.NODE_ENV === "development",
+    })
+
+    initialized.current = true
+  }, [])
 
   return <PHProvider client={posthog}>{children}</PHProvider>
 }
