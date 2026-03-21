@@ -1,13 +1,13 @@
 "use client"
 
+import posthog from "posthog-js"
 import { useEffect } from "react"
-import { usePostHog } from "posthog-js/react"
 import { createClient } from "@/lib/supabase/client"
 
 export function PostHogIdentify() {
-  const posthog = usePostHog()
-
   useEffect(() => {
+    if (!posthog.__loaded) return
+
     const supabase = createClient()
 
     const {
@@ -29,7 +29,7 @@ export function PostHogIdentify() {
     })
 
     return () => subscription.unsubscribe()
-  }, [posthog])
+  }, [])
 
   return null
 }
