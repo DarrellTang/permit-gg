@@ -26,6 +26,10 @@ export async function saveQuizResults(input: SaveQuizResultsInput) {
   const validated = SaveQuizResultsInput.parse(input)
   const supabase = await createClient()
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   const score = validated.answers.filter((a) => a.isCorrect).length
   const passed = validated.mode === "sim" ? score >= 38 : null
 
@@ -40,6 +44,7 @@ export async function saveQuizResults(input: SaveQuizResultsInput) {
       started_at: validated.startedAt,
       completed_at: validated.completedAt,
       is_complete: validated.isComplete,
+      user_id: user?.id ?? null,
     })
     .select("id")
     .single()
@@ -53,6 +58,7 @@ export async function saveQuizResults(input: SaveQuizResultsInput) {
     correct_answer: a.correctAnswer,
     is_correct: a.isCorrect,
     time_taken_ms: a.timeTakenMs,
+    user_id: user?.id ?? null,
   }))
 
   if (answerRows.length > 0) {

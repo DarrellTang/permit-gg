@@ -10,6 +10,7 @@ import { QuizStats } from "@/components/summary/quiz-stats"
 import { CategoryRadar } from "@/components/summary/category-radar"
 import { WrongAnswerCarousel } from "@/components/summary/wrong-answer-carousel"
 import { SmartActions } from "@/components/summary/smart-actions"
+import { SignupPrompt } from "@/components/summary/signup-prompt"
 import type { QuizSummary } from "@/lib/utils/quiz-summary"
 
 export default function PracticeSummaryPage() {
@@ -104,6 +105,8 @@ function PracticeSummaryContent() {
           wrongAnswers={summary.wrongAnswers}
           questions={questions}
         />
+
+        <SignupPrompt />
 
         <SmartActions
           mode="practice"

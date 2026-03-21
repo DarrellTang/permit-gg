@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { createClient } from "@/lib/supabase/server"
 import {
   Card,
   CardContent,
@@ -7,14 +8,31 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  let displayName = "there"
+
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("display_name")
+      .eq("id", user.id)
+      .single()
+
+    displayName = profile?.display_name ?? user.email?.split("@")[0] ?? "there"
+  }
+
   return (
     <div className="mx-auto max-w-5xl space-y-8 p-6 lg:p-8">
       <div className="space-y-2">
         <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan lg:text-4xl">
-          Welcome to PERMIT.GG
+          Welcome back, {displayName}
         </h1>
-        <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; Your journey starts here</p>
+        <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; Your journey continues</p>
         <p className="font-ui text-base text-muted-foreground">
           Your CA permit test prep starts here
         </p>

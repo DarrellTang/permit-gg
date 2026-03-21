@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 export async function signOut() {
@@ -42,4 +43,11 @@ export async function signUpWithEmail(formData: FormData) {
   }
 
   redirect("/dashboard")
+}
+
+export async function markFreeQuizUsed() {
+  const cookieStore = await cookies()
+  cookieStore.set("permit_free_quiz_used", "true", {
+    maxAge: 365 * 24 * 60 * 60,
+  })
 }

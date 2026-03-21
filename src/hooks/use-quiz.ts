@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { useQuizStore } from "@/stores/quiz-store"
 import { fetchQuestions, saveQuizResults } from "@/server/actions/quiz"
+import { markFreeQuizUsed } from "@/server/actions/auth"
+import { analytics } from "@/lib/posthog/events"
 import { AUTO_ADVANCE_DELAY_MS } from "@/lib/constants/quiz-config"
 import type { QuizMode } from "@/lib/types/quiz"
 
@@ -68,6 +70,12 @@ export function useQuiz() {
     async (quizMode: QuizMode, questionCount?: number) => {
       const fetchedQuestions = await fetchQuestions(quizMode, questionCount)
       initSession(fetchedQuestions, quizMode)
+
+      if (quizMode === "sim") {
+        analytics.simTestStarted()
+      } else {
+        analytics.quizStarted(quizMode, fetchedQuestions.length)
+      }
     },
     [initSession]
   )
@@ -81,6 +89,18 @@ export function useQuiz() {
 
   const handleSubmit = useCallback(() => {
     submitAnswer()
+
+    const state = useQuizStore.getState()
+    const latestAnswer = state.answers[state.answers.length - 1]
+    const question = state.questions[state.currentIndex - (state.mode === "sim" ? 1 : 0)]
+
+    if (latestAnswer && question) {
+      analytics.answerSubmitted(
+        latestAnswer.isCorrect,
+        question.categorySlug,
+        state.streak
+      )
+    }
   }, [submitAnswer])
 
   const scheduleAutoAdvance = useCallback(() => {
@@ -104,6 +124,8 @@ export function useQuiz() {
   const handleQuit = useCallback(async () => {
     const startedAt = new Date(sessionStartTime).toISOString()
 
+    analytics.quizQuit(mode, answers.length, score)
+
     await saveQuizResults({
       mode,
       totalQuestions,
@@ -115,11 +137,12 @@ export function useQuiz() {
 
     quitQuiz()
     router.push("/dashboard")
-  }, [mode, totalQuestions, answers, sessionStartTime, quitQuiz, router])
+  }, [mode, totalQuestions, answers, sessionStartTime, score, quitQuiz, router])
 
   const handleComplete = useCallback(async () => {
     const startedAt = new Date(sessionStartTime).toISOString()
     const completedAt = new Date().toISOString()
+    const totalTimeMs = Date.now() - sessionStartTime
 
     completeQuiz()
 
@@ -132,11 +155,27 @@ export function useQuiz() {
       isComplete: true,
     })
 
+    const finalPercentage =
+      totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0
+
+    analytics.quizCompleted(mode, score, finalPercentage, totalTimeMs)
+
+    if (mode === "sim" && score >= 38) {
+      analytics.simTestPassed(score, finalPercentage)
+    }
+
     return result.sessionId
-  }, [mode, totalQuestions, answers, sessionStartTime, completeQuiz])
+  }, [mode, totalQuestions, answers, sessionStartTime, score, completeQuiz])
 
   const handlePracticeComplete = useCallback(async () => {
     const sessionId = await handleComplete()
+
+    try {
+      localStorage.setItem("permit_free_quiz_used", "true")
+      await markFreeQuizUsed()
+    } catch {
+      // Cookie setting may fail in some contexts, localStorage is the fallback
+    }
 
     if (sessionId) {
       router.push(`/practice/summary?session=${sessionId}`)

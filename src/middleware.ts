@@ -3,7 +3,6 @@ import { createServerClient } from "@supabase/ssr"
 
 const PROTECTED_PATHS = [
   "/dashboard",
-  "/practice",
   "/simulated-test",
   "/analytics",
   "/flashcards",
@@ -34,15 +33,27 @@ export async function middleware(request: NextRequest) {
   )
 
   const { data, error } = await supabase.auth.getClaims()
+  const isAuthenticated = !error && !!data?.claims
+
+  const pathname = request.nextUrl.pathname
 
   const isProtected = PROTECTED_PATHS.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
+    pathname.startsWith(path)
   )
 
-  if (isProtected && (error || !data?.claims)) {
+  if (isProtected && !isAuthenticated) {
     const loginUrl = new URL("/login", request.url)
-    loginUrl.searchParams.set("next", request.nextUrl.pathname)
+    loginUrl.searchParams.set("next", pathname)
     return NextResponse.redirect(loginUrl)
+  }
+
+  if (pathname.startsWith("/practice") && !isAuthenticated) {
+    const freeQuizUsed = request.cookies.get("permit_free_quiz_used")
+    if (freeQuizUsed) {
+      const loginUrl = new URL("/login", request.url)
+      loginUrl.searchParams.set("next", "/practice")
+      return NextResponse.redirect(loginUrl)
+    }
   }
 
   return response
