@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
-import { Suspense } from "react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { PostHogProvider } from "@/lib/posthog/provider"
-import { PostHogPageView } from "@/lib/posthog/page-view"
 import { PostHogIdentify } from "@/lib/posthog/identify"
 import { inter, orbitron, chakraPetch } from "@/fonts"
 import "./globals.css"
@@ -32,9 +30,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <PostHogProvider>
-            <Suspense fallback={null}>
-              <PostHogPageView />
-            </Suspense>
             <PostHogIdentify />
             {children}
           </PostHogProvider>
