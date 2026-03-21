@@ -125,7 +125,7 @@ export function QuizShell({ mode }: QuizShellProps) {
             <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan">
               Practice Quiz
             </h1>
-            <p className="mt-2 font-body text-muted-foreground">
+            <p className="mt-2 font-ui text-sm text-muted-foreground">
               Mixed topics from the CA DMV handbook
             </p>
           </div>

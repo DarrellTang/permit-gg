@@ -56,7 +56,7 @@ export function QuestionCard({
             </span>
             {mode === "sim" && <FlagButton />}
           </div>
-          <p className="font-body text-base leading-relaxed text-foreground">
+          <p className="font-ui text-base leading-relaxed text-foreground">
             {question.questionText}
           </p>
         </div>
