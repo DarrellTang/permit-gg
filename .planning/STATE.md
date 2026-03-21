@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-stopped_at: Completed 2.1-01-PLAN.md
-last_updated: "2026-03-21T06:27:00.000Z"
-last_activity: 2026-03-21 -- Completed plan 2.1-01 (Auth infrastructure)
+stopped_at: Completed 2.1-02-PLAN.md
+last_updated: "2026-03-21T06:35:00.000Z"
+last_activity: 2026-03-21 -- Completed plan 2.1-02 (PostHog instrumentation & auth integration)
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 8
-  completed_plans: 8
+  completed_plans: 10
   percent: 100
 ---
 
@@ -26,18 +26,18 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 ## Current Position
 
 Phase: 2.1 (Auth, Profiles & Instrumentation)
-Plan: 1 of N in current phase
-Status: Plan 2.1-01 complete, continuing phase 2.1
-Last activity: 2026-03-21 -- Completed plan 2.1-01 (Auth infrastructure)
+Plan: 2 of 2 in current phase (phase complete)
+Status: Phase 2.1 complete
+Last activity: 2026-03-21 -- Completed plan 2.1-02 (PostHog instrumentation & auth integration)
 
 Progress: [██████████] 100% (phases 1-2) + 2.1 in progress
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 6min
-- Total execution time: 0.82 hours
+- Total plans completed: 10
+- Average duration: 5min
+- Total execution time: 0.87 hours
 
 **By Phase:**
 
@@ -45,11 +45,11 @@ Progress: [██████████] 100% (phases 1-2) + 2.1 in progress
 |-------|-------|-------|----------|
 | 1 | 4 | 26min | 7min |
 | 2 | 4 | 20min | 5min |
-| 2.1 | 1 | 5min | 5min |
+| 2.1 | 2 | 8min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (5min), 02-02 (6min), 02-03 (5min), 02-04 (4min), 2.1-01 (5min)
-- Trend: stable
+- Last 5 plans: 02-02 (6min), 02-03 (5min), 02-04 (4min), 2.1-01 (5min), 2.1-02 (3min)
+- Trend: accelerating
 
 *Updated after each plan completion*
 | Phase 02 P01 | 5min | 3 tasks | 11 files |
@@ -57,6 +57,7 @@ Progress: [██████████] 100% (phases 1-2) + 2.1 in progress
 | Phase 02 P03 | 5min | 3 tasks | 12 files |
 | Phase 02 P04 | 4min | 3 tasks | 12 files |
 | Phase 2.1 P01 | 5min | 3 tasks | 8 files |
+| Phase 2.1 P02 | 3min | 3 tasks | 15 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,10 @@ Recent decisions affecting current work:
 - [Phase 2.1]: Nullable user_id on quiz tables to support free quiz for unauthenticated users
 - [Phase 2.1]: Separate anon RLS INSERT policies with user_id IS NULL check for free quiz data
 - [Phase 2.1]: Suspense boundary wrapping useSearchParams on login page for Next.js SSG compatibility
+- [Phase 2.1]: capture_pageview: false with custom PostHogPageView component for App Router compatibility
+- [Phase 2.1]: SSR guard wrapper on all posthog.capture calls to prevent server-side errors
+- [Phase 2.1]: Free quiz gate uses both cookie (server-side middleware) and localStorage (client UX)
+- [Phase 2.1]: /practice removed from PROTECTED_PATHS to allow first free quiz, then cookie-gated
 
 ### Pending Todos
 
@@ -102,6 +107,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T06:27:00.000Z
-Stopped at: Completed 2.1-01-PLAN.md
-Resume file: .planning/phases/2.1-auth-profiles-instrumentation-inserted/2.1-01-SUMMARY.md
+Last session: 2026-03-21T06:35:00.000Z
+Stopped at: Completed 2.1-02-PLAN.md
+Resume file: .planning/phases/2.1-auth-profiles-instrumentation-inserted/2.1-02-SUMMARY.md
