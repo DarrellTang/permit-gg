@@ -14,7 +14,7 @@ DROP POLICY "Allow all access to quiz_answers" ON quiz_answers;
 CREATE POLICY "Users can view their own sessions"
   ON quiz_sessions FOR SELECT
   TO authenticated
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = user_id OR user_id IS NULL);
 
 CREATE POLICY "Users can insert their own sessions"
   ON quiz_sessions FOR INSERT
@@ -31,7 +31,7 @@ CREATE POLICY "Users can update their own sessions"
 CREATE POLICY "Users can view their own answers"
   ON quiz_answers FOR SELECT
   TO authenticated
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = user_id OR user_id IS NULL);
 
 CREATE POLICY "Users can insert their own answers"
   ON quiz_answers FOR INSERT
@@ -48,3 +48,13 @@ CREATE POLICY "Anon users can insert answers"
   ON quiz_answers FOR INSERT
   TO anon
   WITH CHECK (user_id IS NULL);
+
+CREATE POLICY "Anon users can view anon sessions"
+  ON quiz_sessions FOR SELECT
+  TO anon
+  USING (user_id IS NULL);
+
+CREATE POLICY "Anon users can view anon answers"
+  ON quiz_answers FOR SELECT
+  TO anon
+  USING (user_id IS NULL);

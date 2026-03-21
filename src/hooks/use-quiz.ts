@@ -168,14 +168,16 @@ export function useQuiz() {
   }, [mode, totalQuestions, answers, sessionStartTime, score, completeQuiz])
 
   const handlePracticeComplete = useCallback(async () => {
-    const sessionId = await handleComplete()
-
+    // Mark free quiz as used BEFORE saving results so the gate is set
+    // even if saveQuizResults fails (e.g. for anon users)
     try {
       localStorage.setItem("permit_free_quiz_used", "true")
       await markFreeQuizUsed()
     } catch {
       // Cookie setting may fail in some contexts, localStorage is the fallback
     }
+
+    const sessionId = await handleComplete()
 
     if (sessionId) {
       router.push(`/practice/summary?session=${sessionId}`)
