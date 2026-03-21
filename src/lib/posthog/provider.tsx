@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
   posthog.init("phc_G6G0W5qoY5uXOyAbA0674BW4ugdnYFZl6DstK7zUSPJ", {
     api_host: "/ingest",
     ui_host: "https://us.i.posthog.com",
-    person_profiles: "identified_only",
+    person_profiles: "always",
     capture_exceptions: true,
   })
 }
