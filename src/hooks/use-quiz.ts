@@ -101,6 +101,10 @@ export function useQuiz() {
         state.streak
       )
     }
+
+    if (state.streak > 0 && state.streak % 5 === 0) {
+      analytics.streakAchieved(state.streak)
+    }
   }, [submitAnswer])
 
   const scheduleAutoAdvance = useCallback(() => {

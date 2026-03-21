@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "motion/react"
 import { useState, useCallback } from "react"
 import { Badge } from "@/components/ui/badge"
+import { analytics } from "@/lib/posthog/events"
 import type { QuizAnswer, PreparedQuestion } from "@/lib/types/quiz"
 
 const SWIPE_THRESHOLD = 100
@@ -28,6 +29,7 @@ export function WrongAnswerCarousel({
       setCurrentIndex((prev) =>
         Math.max(0, Math.min(wrongAnswers.length - 1, prev + newDirection))
       )
+      analytics.wrongAnswerReviewed()
     },
     [wrongAnswers.length]
   )

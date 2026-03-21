@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { analytics } from "@/lib/posthog/events"
 import type { QuizMode } from "@/lib/types/quiz"
 
 interface CategoryBreakdown {
@@ -37,7 +38,11 @@ export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
       className="space-y-3"
     >
       {weakest && (
-        <Link href="/practice" data-category={weakest.categorySlug}>
+        <Link
+          href="/practice"
+          data-category={weakest.categorySlug}
+          onClick={() => analytics.categoryDrillStarted(weakest.categorySlug)}
+        >
           <div className="relative overflow-hidden rounded-xl bg-[var(--surface-container-low)] ghost-border p-4 transition-all bloom-hover">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">

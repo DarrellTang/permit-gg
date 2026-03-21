@@ -2,8 +2,10 @@
 
 import { Suspense, useState, useTransition } from "react"
 import { useSearchParams } from "next/navigation"
+import posthog from "posthog-js"
 import { createClient } from "@/lib/supabase/client"
 import { signInWithEmail, signUpWithEmail } from "@/server/actions/auth"
+import { analytics } from "@/lib/posthog/events"
 
 type AuthMode = "signin" | "signup"
 
@@ -48,11 +50,13 @@ function LoginContent() {
       },
     })
     if (oauthError) {
+      posthog.captureException(oauthError)
       setError(oauthError.message)
       setOauthLoading(null)
       return
     }
     if (data.url) {
+      analytics.loginCompleted(provider)
       window.location.href = data.url
     }
   }
@@ -60,12 +64,17 @@ function LoginContent() {
   async function handleEmailSubmit(formData: FormData) {
     setError(null)
     startTransition(async () => {
-      const result =
-        mode === "signin"
-          ? await signInWithEmail(formData)
-          : await signUpWithEmail(formData)
-      if (result?.error) {
-        setError(result.error)
+      try {
+        const result =
+          mode === "signin"
+            ? await signInWithEmail(formData)
+            : await signUpWithEmail(formData)
+        if (result?.error) {
+          setError(result.error)
+        }
+      } catch (err) {
+        posthog.captureException(err)
+        throw err
       }
     })
   }

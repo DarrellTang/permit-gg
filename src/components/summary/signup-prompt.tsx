@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { analytics } from "@/lib/posthog/events"
 
 export function SignupPrompt() {
   const [showPrompt, setShowPrompt] = useState(false)
@@ -29,6 +30,7 @@ export function SignupPrompt() {
       <Link
         href="/login"
         className="mt-4 inline-block rounded-lg bg-neon-cyan/20 px-6 py-2.5 font-ui text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/30"
+        onClick={() => analytics.signupPromptClicked()}
       >
         Sign Up Free
       </Link>

@@ -56,4 +56,9 @@ export const analytics = {
 
   signupCompleted: (provider: "google" | "discord" | "email") =>
     capture("signup_completed", { provider }),
+
+  loginCompleted: (provider: "google" | "discord" | "email") =>
+    capture("login_completed", { provider }),
+
+  signupPromptClicked: () => capture("signup_prompt_clicked"),
 }
