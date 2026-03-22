@@ -8,14 +8,12 @@ if (typeof window !== "undefined") {
     api_host: "/ingest",
     ui_host: "https://us.i.posthog.com",
     person_profiles: "always",
-    capture_pageview: true,
+    capture_pageview: false,
     capture_pageleave: true,
     capture_exceptions: true,
     autocapture: true,
     persistence: "localStorage+cookie",
-    loaded: (ph) => {
-      ph.capture("$pageview")
-    },
+    debug: process.env.NODE_ENV === "development",
   })
 }
 
