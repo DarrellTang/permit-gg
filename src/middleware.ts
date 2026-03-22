@@ -47,7 +47,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  if (pathname.startsWith("/practice") && !isAuthenticated) {
+  if (pathname === "/practice" && !isAuthenticated) {
     const freeQuizUsed = request.cookies.get("permit_free_quiz_used")
     if (freeQuizUsed) {
       const loginUrl = new URL("/login", request.url)

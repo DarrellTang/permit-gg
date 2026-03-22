@@ -102,7 +102,7 @@ export async function fetchSessionSummary(
     .from("quiz_answers")
     .select("*, seed_questions(question_text, correct_answer, wrong_answers, explanation, handbook_reference, categories(slug, name))")
     .eq("session_id", sessionId)
-    .order("created_at", { ascending: true })
+    .order("answered_at", { ascending: true })
 
   if (answersError || !answerRows) return null
 
