@@ -14,6 +14,7 @@ import { FlaggedReview } from "./flagged-review"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PRACTICE_DEFAULTS } from "@/lib/constants/quiz-config"
+import { createClient } from "@/lib/supabase/client"
 import type { QuizMode } from "@/lib/types/quiz"
 
 type ShellState = "pre-start" | "loading" | "active" | "complete"
@@ -32,6 +33,7 @@ export function QuizShell({ mode }: QuizShellProps) {
   const [showStreak, setShowStreak] = useState(false)
   const [simSubmitting, setSimSubmitting] = useState(false)
   const [answerRecorded, setAnswerRecorded] = useState(false)
+  const [completionError, setCompletionError] = useState(false)
   const prevAnswerCountRef = useRef(0)
 
   const quiz = useQuiz()
@@ -94,7 +96,13 @@ export function QuizShell({ mode }: QuizShellProps) {
   useEffect(() => {
     if (quiz.mode === "practice" && quiz.isComplete && shellState === "active") {
       setShellState("complete")
-      quiz.handlePracticeComplete()
+      ;(async () => {
+        try {
+          await quiz.handlePracticeComplete()
+        } catch {
+          setCompletionError(true)
+        }
+      })()
     }
   }, [quiz.isComplete, shellState, quiz.mode])
 
@@ -169,27 +177,43 @@ export function QuizShell({ mode }: QuizShellProps) {
   }
 
   if (shellState === "complete") {
+    if (completionError) {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-background p-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full max-w-md space-y-6 text-center"
+          >
+            <h2 className="font-display text-3xl font-bold text-neon-cyan">
+              Quiz Complete!
+            </h2>
+            <p className="font-body text-lg text-muted-foreground">
+              {quiz.score}/{quiz.totalQuestions} correct (
+              {quiz.scorePercentage}%)
+            </p>
+            <Button
+              onClick={() => (window.location.href = "/dashboard")}
+              variant="outline"
+              className="font-ui"
+            >
+              Back to Dashboard
+            </Button>
+          </motion.div>
+        </div>
+      )
+    }
     return (
       <div className="flex min-h-screen items-center justify-center bg-background p-6">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md space-y-6 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center"
         >
-          <h2 className="font-display text-3xl font-bold text-neon-cyan">
-            Quiz Complete!
-          </h2>
-          <p className="font-body text-lg text-muted-foreground">
-            {quiz.score}/{quiz.totalQuestions} correct (
-            {quiz.scorePercentage}%)
+          <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-neon-cyan border-t-transparent" />
+          <p className="mt-4 font-ui text-sm text-muted-foreground">
+            Saving your results...
           </p>
-          <Button
-            onClick={() => (window.location.href = "/dashboard")}
-            variant="outline"
-            className="font-ui"
-          >
-            Back to Dashboard
-          </Button>
         </motion.div>
       </div>
     )

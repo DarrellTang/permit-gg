@@ -172,8 +172,6 @@ export function useQuiz() {
   }, [mode, totalQuestions, answers, sessionStartTime, score, completeQuiz])
 
   const handlePracticeComplete = useCallback(async () => {
-    // Mark free quiz as used BEFORE saving results so the gate is set
-    // even if saveQuizResults fails (e.g. for anon users)
     try {
       localStorage.setItem("permit_free_quiz_used", "true")
       await markFreeQuizUsed()
@@ -181,14 +179,23 @@ export function useQuiz() {
       // Cookie setting may fail in some contexts, localStorage is the fallback
     }
 
-    const sessionId = await handleComplete()
+    let sessionId: string | undefined
+    try {
+      sessionId = await handleComplete()
+    } catch {
+      // Save failed (likely RLS issue for anon user) -- navigate without session ID
+      // Summary page will fall back to Zustand store data
+      completeQuiz()
+    }
 
     if (sessionId) {
       router.push(`/practice/summary?session=${sessionId}`)
+    } else {
+      router.push("/practice/summary")
     }
 
     return sessionId
-  }, [handleComplete, router])
+  }, [handleComplete, router, completeQuiz])
 
   const handleSimComplete = useCallback(async () => {
     const sessionId = await handleComplete()
