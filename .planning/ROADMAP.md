@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation + Question Bank** - Project scaffold, database schema, verified seed questions, and base UI shell
 - [x] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries (completed 2026-03-19)
-- [x] **Phase 2.1: Auth, Profiles & Instrumentation** - INSERTED — Supabase Auth, user profiles with Stripe/tier columns, PostHog analytics, user-scoped data (completed 2026-03-21)
+- [ ] **Phase 2.1: Auth, Profiles & Instrumentation** - INSERTED — Supabase Auth, user profiles with Stripe/tier columns, PostHog analytics, user-scoped data (UAT gap closure in progress)
 - [ ] **Phase 3: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
 - [ ] **Phase 4: AI Question Variation Engine** - Analytics-targeted AI variation generation for weak areas, real-time fallback, missed question tracking
 - [ ] **Phase 5: Adaptive Learning** - Spaced repetition scheduling, flashcard mode, and missed question review with AI rephrasing
@@ -68,11 +68,13 @@ Plans:
   5. PostHog tracks page views and identifies authenticated users
   6. RLS policies enforce user-scoped data access
   7. Existing Lilly quiz data is preserved (migration backfills her user_id)
-**Plans**: 2 plans
+**Plans**: 4 plans
 
 Plans:
 - [x] 2.1-01-PLAN.md — Database migrations (profiles + user-scoped quiz data), Supabase client updates, auth middleware, OAuth callback, auth server actions, login page
 - [x] 2.1-02-PLAN.md — PostHog analytics (provider, page views, identify, events), free quiz gating, user-scoped quiz data wiring, personalized app shell
+- [ ] 2.1-03-PLAN.md — Gap closure: fix free quiz completion flow, quiz gate enforcement, and summary data persistence
+- [ ] 2.1-04-PLAN.md — Gap closure: fix PostHog pageview conflicts and verify production event delivery
 
 ### Phase 3: Analytics + Category Intelligence
 **Goal**: Users can see exactly where they are strong and weak, with data-driven recommendations that connect insight to targeted practice
@@ -131,7 +133,7 @@ Phases execute in numeric order: 1 -> 2 -> 2.1 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
 | 2. Core Quiz Flow | 4/4 | Complete | 2026-03-19 |
-| 2.1. Auth, Profiles & Instrumentation | 2/2 | Complete | 2026-03-21 |
+| 2.1. Auth, Profiles & Instrumentation | 2/4 | Gap closure | - |
 | 3. Analytics + Category Intelligence | 0/0 | Not started | - |
 | 4. AI Question Variation Engine | 0/0 | Not started | - |
 | 5. Adaptive Learning | 0/0 | Not started | - |
