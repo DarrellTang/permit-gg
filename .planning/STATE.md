@@ -109,4 +109,4 @@ None yet.
 
 Last session: 2026-03-21T06:35:00.000Z
 Stopped at: Completed 2.1-02-PLAN.md
-Resume file: .planning/phases/2.1-auth-profiles-instrumentation-inserted/2.1-02-SUMMARY.md
+Resume file: .planning/phases/02.1-auth-profiles-instrumentation-inserted/2.1-02-SUMMARY.md
