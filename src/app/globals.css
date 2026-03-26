@@ -83,7 +83,7 @@
   --chart-3: oklch(0.45 0.15 195);
   --chart-4: oklch(0.40 0.15 195);
   --chart-5: oklch(0.40 0.22 300);
-  --radius: 0.25rem;
+  --radius: 0;
   --sidebar: oklch(0.96 0.005 280);
   --sidebar-foreground: oklch(0.15 0.02 280);
   --sidebar-primary: oklch(0.50 0.28 340);
@@ -129,7 +129,7 @@ html.dark {
   --chart-3: oklch(0.80 0.18 195);
   --chart-4: oklch(0.75 0.15 195);
   --chart-5: oklch(0.55 0.25 300);
-  --radius: 0.25rem;
+  --radius: 0;
   --sidebar: oklch(0.15 0.02 280);
   --sidebar-foreground: oklch(0.95 0.01 280);
   --sidebar-primary: oklch(0.65 0.28 340);
