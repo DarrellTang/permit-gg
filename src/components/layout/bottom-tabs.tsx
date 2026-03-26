@@ -54,7 +54,7 @@ export function BottomTabs() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 bg-[var(--surface-container)]/80 backdrop-blur-[16px] lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 glass lg:hidden">
       <nav className="flex items-stretch justify-around pb-[env(safe-area-inset-bottom)]">
         {TAB_ITEMS.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
