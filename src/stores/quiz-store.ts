@@ -79,7 +79,7 @@ export const useQuizStore = create<QuizState>()((set, get) => ({
 
   selectAnswer: (answer) => {
     const { answerState } = get()
-    if (answerState !== "idle") return
+    if (answerState !== "idle" && answerState !== "selected") return
     set({ selectedAnswer: answer, answerState: "selected" })
   },
 
