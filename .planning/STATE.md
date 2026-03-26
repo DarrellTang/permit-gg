@@ -113,9 +113,13 @@ Recent decisions affecting current work:
 
 None yet.
 
+### Roadmap Evolution
+
+- Phase 03.1 inserted after Phase 3: UI Polish & Style Reconciliation (URGENT) — Landing page has sharp cyberpunk/Minority Report feel while app interior has soft rounded edges. Need to reconcile design language across the product.
+
 ### Blockers/Concerns
 
-- Phase 3: Prompt engineering for constrained question rephrasing needs development and testing
+- Phase 4: Prompt engineering for constrained question rephrasing needs development and testing
 
 ## Session Continuity
 

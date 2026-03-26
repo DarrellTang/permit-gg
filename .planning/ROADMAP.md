@@ -95,6 +95,16 @@ Plans:
 - [x] 03-03-PLAN.md — Category drill mode: practice page category filtering, mastery delta banner, smart actions wiring
 - [x] 03-04-PLAN.md — Gap closure: fix readiness gauge ring visibility and mastery delta banner for all user types
 
+### Phase 03.1: UI Polish & Style Reconciliation (INSERTED)
+
+**Goal:** [Urgent work - to be planned]
+**Requirements**: TBD
+**Depends on:** Phase 3
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 03.1 to break down)
+
 ### Phase 4: AI Question Variation Engine
 **Goal**: Analytics-informed AI generates question variations targeted at weak categories, preventing memorization where it matters most while minimizing API costs
 **Depends on**: Phase 3
