@@ -83,15 +83,21 @@ export function QuizShell({ mode, categorySlug, categoryName, categoryIcon }: Qu
           const catMastery = analyticsData.categories.find(
             (c) => c.slug === categorySlug
           )
-          if (catMastery) {
-            sessionStorage.setItem(
-              `drill_pre_mastery_${categorySlug}`,
-              String(catMastery.masteryPct)
-            )
-          }
+          sessionStorage.setItem(
+            `drill_pre_mastery_${categorySlug}`,
+            String(catMastery?.masteryPct ?? 0)
+          )
+        } else {
+          sessionStorage.setItem(
+            `drill_pre_mastery_${categorySlug}`,
+            "0"
+          )
         }
       } catch {
-        // Analytics fetch failed -- proceed without pre-drill mastery
+        sessionStorage.setItem(
+          `drill_pre_mastery_${categorySlug}`,
+          "0"
+        )
       }
     }
 

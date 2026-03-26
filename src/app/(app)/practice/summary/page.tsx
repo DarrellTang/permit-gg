@@ -97,7 +97,15 @@ function PracticeSummaryContent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/30">
       <div className="mx-auto max-w-lg space-y-8 px-4 py-8 sm:px-6">
-        {categorySlug && <MasteryDeltaBanner categorySlug={categorySlug} />}
+        {categorySlug && (
+          <MasteryDeltaBanner
+            categorySlug={categorySlug}
+            localAnswers={answers.map((a, i) => ({
+              isCorrect: a.isCorrect,
+              categorySlug: questions[i]?.categorySlug,
+            }))}
+          />
+        )}
 
         <ScoreReveal score={summary.score} total={summary.total} />
 

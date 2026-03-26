@@ -7,15 +7,33 @@ import { CATEGORIES } from "@/lib/constants/categories"
 
 interface MasteryDeltaBannerProps {
   categorySlug: string
+  localAnswers?: { isCorrect: boolean; categorySlug?: string }[]
 }
 
-export function MasteryDeltaBanner({ categorySlug }: MasteryDeltaBannerProps) {
+export function MasteryDeltaBanner({ categorySlug, localAnswers }: MasteryDeltaBannerProps) {
   const [before, setBefore] = useState<number | null>(null)
   const [after, setAfter] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
   const category = CATEGORIES.find((c) => c.slug === categorySlug)
   const categoryName = category?.name ?? categorySlug
+
+  const computeLocalMastery = () => {
+    if (!localAnswers || localAnswers.length === 0) {
+      setAfter(0)
+      return
+    }
+    const categoryAnswers = localAnswers.filter(
+      (a) => a.categorySlug === categorySlug
+    )
+    if (categoryAnswers.length === 0) {
+      setAfter(0)
+      return
+    }
+    const correct = categoryAnswers.filter((a) => a.isCorrect).length
+    const pct = Math.round((correct / categoryAnswers.length) * 100)
+    setAfter(pct)
+  }
 
   useEffect(() => {
     const preMastery = sessionStorage.getItem(`drill_pre_mastery_${categorySlug}`)
@@ -35,11 +53,13 @@ export function MasteryDeltaBanner({ categorySlug }: MasteryDeltaBannerProps) {
           const catMastery = data.categories.find((c) => c.slug === categorySlug)
           if (catMastery) {
             setAfter(catMastery.masteryPct)
+            return
           }
         }
+        computeLocalMastery()
       })
       .catch(() => {
-        // Failed to fetch post-drill mastery
+        computeLocalMastery()
       })
       .finally(() => setLoading(false))
   }, [categorySlug])
