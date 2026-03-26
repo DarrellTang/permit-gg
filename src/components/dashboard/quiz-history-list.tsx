@@ -25,6 +25,11 @@ function formatRelativeTime(dateString: string): string {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
 }
 
+function formatTimestamp(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })
+}
+
 function getModeLabel(mode: string): string {
   switch (mode) {
     case "practice":
@@ -62,18 +67,28 @@ export function QuizHistoryList({ sessions }: QuizHistoryListProps) {
         Recent Quizzes
       </h2>
       <Card className="">
-        <CardHeader className="pb-2">
-          <CardTitle className="font-ui text-xs text-muted-foreground">
-            Last {recent.length} sessions
-          </CardTitle>
+        <CardHeader className="border-b border-neon-cyan/10 pb-3">
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1">
+              <div className="h-2 w-2 rounded-full bg-neon-pink/60" />
+              <div className="h-2 w-2 rounded-full bg-neon-purple/60" />
+              <div className="h-2 w-2 rounded-full bg-neon-cyan/60" />
+            </div>
+            <CardTitle className="font-ui text-[10px] uppercase tracking-widest text-muted-foreground">
+              SESSION_LOG [{recent.length} ENTRIES]
+            </CardTitle>
+          </div>
         </CardHeader>
         <CardContent className="space-y-1">
           {recent.map((session) => (
             <div
               key={session.sessionId}
-              className="flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-card/60"
+              className="flex items-center justify-between rounded-md px-3 py-2 transition-colors hover:bg-neon-cyan/5"
             >
               <div className="flex items-center gap-3">
+                <span className="font-ui text-[10px] text-muted-foreground/60 tabular-nums w-10">
+                  {formatTimestamp(session.startedAt)}
+                </span>
                 <Badge
                   className={`${getModeColor(session.mode)} text-[10px] font-bold min-w-[60px] justify-center`}
                 >
@@ -82,15 +97,20 @@ export function QuizHistoryList({ sessions }: QuizHistoryListProps) {
                 <span className="font-ui text-sm font-medium text-foreground">
                   {session.score}/{session.total}
                 </span>
-                <span className="font-ui text-sm text-muted-foreground">
-                  ({Math.round(session.percentage)}%)
+                <span className={`font-ui text-sm ${session.percentage >= 83 ? 'text-neon-cyan' : session.percentage >= 60 ? 'text-neon-purple' : 'text-neon-pink'}`}>
+                  {Math.round(session.percentage)}%
                 </span>
               </div>
-              <span className="font-ui text-xs text-muted-foreground">
+              <span className="font-ui text-[10px] text-muted-foreground/40">
                 {formatRelativeTime(session.startedAt)}
               </span>
             </div>
           ))}
+          <div className="mt-2 border-t border-neon-cyan/10 pt-3 text-center">
+            <span className="font-ui text-[10px] uppercase tracking-widest text-neon-cyan/40 cursor-default">
+              {`> FETCH_MORE_DATA_`}
+            </span>
+          </div>
         </CardContent>
       </Card>
     </section>
