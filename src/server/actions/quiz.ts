@@ -7,11 +7,13 @@ import type { QuizSummary } from "@/lib/utils/quiz-summary"
 import {
   selectPracticeQuestions,
   selectSimQuestions,
+  selectCategoryQuestions,
 } from "@/server/db/queries/questions"
 
 export async function fetchQuestions(
   mode: QuizMode,
-  count?: number
+  count?: number,
+  categorySlug?: string
 ): Promise<PreparedQuestion[]> {
   const supabase = await createClient()
 
@@ -19,10 +21,17 @@ export async function fetchQuestions(
     return selectSimQuestions(supabase)
   }
 
+  if (categorySlug) {
+    return selectCategoryQuestions(supabase, categorySlug, count)
+  }
+
   return selectPracticeQuestions(supabase, count)
 }
 
-export async function saveQuizResults(input: SaveQuizResultsInput) {
+export async function saveQuizResults(
+  input: SaveQuizResultsInput,
+  categorySlug?: string
+) {
   const validated = SaveQuizResultsInput.parse(input)
   const supabase = await createClient()
 
@@ -49,6 +58,7 @@ export async function saveQuizResults(input: SaveQuizResultsInput) {
       completed_at: validated.completedAt,
       is_complete: validated.isComplete,
       user_id: userId,
+      category_slug: categorySlug ?? null,
     })
     .select("id")
     .single()

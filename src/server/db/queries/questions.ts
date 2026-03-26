@@ -127,3 +127,21 @@ export async function selectSimQuestions(
 
   return shuffleArray(selected).map(toPreparedQuestion)
 }
+
+export async function selectCategoryQuestions(
+  supabase: SupabaseClient,
+  categorySlug: string,
+  count: number = 15
+): Promise<PreparedQuestion[]> {
+  const { data, error } = await supabase
+    .from("seed_questions")
+    .select("*, categories!inner(slug, name)")
+    .eq("categories.slug", categorySlug)
+    .limit(count * 2)
+    .order("id")
+
+  if (error) throw error
+
+  const shuffled = shuffleArray(data as SeedQuestionRow[])
+  return shuffled.slice(0, count).map(toPreparedQuestion)
+}
