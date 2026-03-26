@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "motion/react"
-import { fetchUserAnalytics } from "@/server/actions/analytics"
 import { CATEGORIES } from "@/lib/constants/categories"
 
 interface MasteryDeltaBannerProps {
@@ -13,61 +12,39 @@ interface MasteryDeltaBannerProps {
 export function MasteryDeltaBanner({ categorySlug, localAnswers }: MasteryDeltaBannerProps) {
   const [before, setBefore] = useState<number | null>(null)
   const [after, setAfter] = useState<number | null>(null)
-  const [loading, setLoading] = useState(true)
 
   const category = CATEGORIES.find((c) => c.slug === categorySlug)
   const categoryName = category?.name ?? categorySlug
 
-  const computeLocalMastery = () => {
-    if (!localAnswers || localAnswers.length === 0) {
-      setAfter(0)
-      return
-    }
-    const categoryAnswers = localAnswers.filter(
-      (a) => a.categorySlug === categorySlug
-    )
-    if (categoryAnswers.length === 0) {
-      setAfter(0)
-      return
-    }
-    const correct = categoryAnswers.filter((a) => a.isCorrect).length
-    const pct = Math.round((correct / categoryAnswers.length) * 100)
-    setAfter(pct)
-  }
-
   useEffect(() => {
     const preMastery = sessionStorage.getItem(`drill_pre_mastery_${categorySlug}`)
-    if (!preMastery) {
-      setLoading(false)
-      return
-    }
+    if (preMastery === null) return
 
     const preValue = Number(preMastery)
     setBefore(preValue)
-
     sessionStorage.removeItem(`drill_pre_mastery_${categorySlug}`)
 
-    fetchUserAnalytics()
-      .then((data) => {
-        if (data) {
-          const catMastery = data.categories.find((c) => c.slug === categorySlug)
-          if (catMastery) {
-            setAfter(catMastery.masteryPct)
-            return
-          }
-        }
-        computeLocalMastery()
-      })
-      .catch(() => {
-        computeLocalMastery()
-      })
-      .finally(() => setLoading(false))
-  }, [categorySlug])
+    // Compute "after" locally from this session's answers — avoids race condition
+    // with server aggregation that already includes these answers
+    if (localAnswers && localAnswers.length > 0) {
+      const categoryAnswers = localAnswers.filter(
+        (a) => a.categorySlug === categorySlug
+      )
+      if (categoryAnswers.length > 0) {
+        const correct = categoryAnswers.filter((a) => a.isCorrect).length
+        const pct = Math.round((correct / categoryAnswers.length) * 100)
+        setAfter(pct)
+        return
+      }
+    }
 
-  if (loading || before === null || after === null) return null
+    // Fallback: if no local answers match, show session score as after
+    setAfter(0)
+  }, [categorySlug, localAnswers])
+
+  if (before === null || after === null) return null
 
   const delta = after - before
-  const isPositive = delta >= 0
 
   return (
     <motion.div
@@ -75,7 +52,7 @@ export function MasteryDeltaBanner({ categorySlug, localAnswers }: MasteryDeltaB
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`w-full overflow-hidden rounded-xl p-4 ${
-        isPositive
+        delta >= 0
           ? "bg-gradient-to-r from-emerald-500/15 to-neon-cyan/15 ghost-border"
           : "bg-gradient-to-r from-red-500/15 to-neon-pink/15 ghost-border"
       }`}
@@ -91,26 +68,14 @@ export function MasteryDeltaBanner({ categorySlug, localAnswers }: MasteryDeltaB
         </div>
         <div className="flex items-center gap-2 font-display">
           <span className="text-sm text-muted-foreground">{before}%</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4 text-muted-foreground"
-          >
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
+          <span className="text-muted-foreground">→</span>
           <span className="text-sm font-bold text-foreground">{after}%</span>
           <span
             className={`text-sm font-bold ${
-              isPositive ? "text-emerald-400" : "text-red-400"
+              delta >= 0 ? "text-emerald-400" : "text-red-400"
             }`}
           >
-            {isPositive ? "+" : ""}{delta}%
+            {delta >= 0 ? "+" : ""}{delta}%
           </span>
         </div>
       </div>
