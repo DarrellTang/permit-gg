@@ -33,10 +33,10 @@ export function ReadinessGauge({ score, message }: ReadinessGaugeProps) {
 
   return (
     <section className="flex flex-col items-center">
-      <div className="relative w-full max-w-[280px]">
+      <div className="w-full max-w-[320px]">
         <ChartContainer
           config={chartConfig}
-          className="aspect-[2/1.2] w-full"
+          className="aspect-[2/1] w-full"
         >
           <RadialBarChart
             data={data}
@@ -44,9 +44,9 @@ export function ReadinessGauge({ score, message }: ReadinessGaugeProps) {
             endAngle={0}
             innerRadius="80%"
             outerRadius="100%"
-            barSize={16}
+            barSize={24}
             cx="50%"
-            cy="80%"
+            cy="85%"
           >
             <PolarAngleAxis
               type="number"
@@ -63,14 +63,14 @@ export function ReadinessGauge({ score, message }: ReadinessGaugeProps) {
           </RadialBarChart>
         </ChartContainer>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-4 pointer-events-none">
+        <div className="flex flex-col items-center text-center -mt-8">
           <span
-            className="font-display text-5xl font-bold lg:text-6xl"
+            className="font-display text-4xl font-bold"
             style={{ color }}
           >
             {displayScore}
           </span>
-          <span className="font-ui text-sm text-muted-foreground mt-1 text-center px-4">
+          <span className="font-ui text-sm text-muted-foreground mt-1 px-4">
             {displayMessage}
           </span>
         </div>
