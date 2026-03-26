@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "motion/react"
 import { CATEGORIES } from "@/lib/constants/categories"
 
@@ -12,20 +12,25 @@ interface MasteryDeltaBannerProps {
 export function MasteryDeltaBanner({ categorySlug, localAnswers }: MasteryDeltaBannerProps) {
   const [before, setBefore] = useState<number | null>(null)
   const [after, setAfter] = useState<number | null>(null)
+  const initialized = useRef(false)
 
   const category = CATEGORIES.find((c) => c.slug === categorySlug)
   const categoryName = category?.name ?? categorySlug
 
   useEffect(() => {
-    const preMastery = sessionStorage.getItem(`drill_pre_mastery_${categorySlug}`)
+    if (initialized.current) return
+    initialized.current = true
+
+    const key = `drill_pre_mastery_${categorySlug}`
+    const preMastery = sessionStorage.getItem(key)
     if (preMastery === null) return
 
     const preValue = Number(preMastery)
     setBefore(preValue)
-    sessionStorage.removeItem(`drill_pre_mastery_${categorySlug}`)
+    // Delay removal so concurrent renders don't lose the value
+    setTimeout(() => sessionStorage.removeItem(key), 1000)
 
-    // Compute "after" locally from this session's answers — avoids race condition
-    // with server aggregation that already includes these answers
+    // Compute "after" locally from this session's answers
     if (localAnswers && localAnswers.length > 0) {
       const categoryAnswers = localAnswers.filter(
         (a) => a.categorySlug === categorySlug
@@ -38,7 +43,6 @@ export function MasteryDeltaBanner({ categorySlug, localAnswers }: MasteryDeltaB
       }
     }
 
-    // Fallback: if no local answers match, show session score as after
     setAfter(0)
   }, [categorySlug, localAnswers])
 
