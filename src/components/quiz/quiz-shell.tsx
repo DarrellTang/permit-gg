@@ -229,7 +229,7 @@ export function QuizShell({ mode, categorySlug, categoryName, categoryIcon }: Qu
 
           <Button
             onClick={handleStart}
-            className="h-12 w-full bg-gradient-to-r from-neon-purple to-neon-cyan font-ui text-base font-bold text-white shadow-lg shadow-neon-purple/20 transition-all hover:shadow-neon-cyan/30"
+            className="neon-glow h-12 w-full bg-gradient-to-r from-neon-purple to-neon-cyan font-ui text-base font-bold text-white shadow-lg shadow-neon-purple/20 transition-all hover:shadow-neon-cyan/30"
           >
             {isDrill ? "Start Drill" : "Start Practice"}
           </Button>

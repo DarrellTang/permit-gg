@@ -33,7 +33,7 @@ export function EmptyState({ variant }: EmptyStateProps) {
         </p>
         <Link
           href="/login"
-          className="mt-6 inline-block rounded-lg bg-neon-pink/20 px-6 py-3 font-ui text-sm font-semibold text-neon-pink transition-all hover:bg-neon-pink/30"
+          className="neon-glow mt-6 inline-block rounded-lg bg-neon-pink/20 px-6 py-3 font-ui text-sm font-semibold text-neon-pink transition-all hover:bg-neon-pink/30"
         >
           Sign In
         </Link>
@@ -66,13 +66,13 @@ export function EmptyState({ variant }: EmptyStateProps) {
       <div className="mt-6 flex gap-3">
         <Link
           href="/practice"
-          className="inline-block rounded-lg bg-neon-cyan/20 px-5 py-3 font-ui text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/30"
+          className="neon-glow inline-block rounded-lg bg-neon-cyan/20 px-5 py-3 font-ui text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/30"
         >
           Start Practice
         </Link>
         <Link
           href="/simulated-test"
-          className="inline-block rounded-lg bg-neon-purple/20 px-5 py-3 font-ui text-sm font-semibold text-neon-purple transition-all hover:bg-neon-purple/30"
+          className="neon-glow inline-block rounded-lg bg-neon-purple/20 px-5 py-3 font-ui text-sm font-semibold text-neon-purple transition-all hover:bg-neon-purple/30"
         >
           Try Sim Test
         </Link>

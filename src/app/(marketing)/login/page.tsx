@@ -109,7 +109,7 @@ function LoginContent() {
             <button
               onClick={() => handleOAuth("google")}
               disabled={oauthLoading !== null}
-              className="flex w-full items-center justify-center gap-3 bg-white px-6 py-4 font-ui text-sm font-bold tracking-wide text-gray-800 transition-all hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-3 glass ghost-border rounded-lg px-6 py-4 font-ui text-sm font-bold tracking-wide text-foreground transition-all bloom-hover active:scale-[0.98] disabled:opacity-50"
             >
               {oauthLoading === "google" ? <LoadingSpinner /> : <GoogleIcon />}
               Continue with Google
@@ -118,8 +118,7 @@ function LoginContent() {
             <button
               onClick={() => handleOAuth("discord")}
               disabled={oauthLoading !== null}
-              className="flex w-full items-center justify-center gap-3 px-6 py-4 font-ui text-sm font-bold tracking-wide text-white transition-all hover:shadow-lg hover:shadow-[#5865F2]/20 active:scale-[0.98] disabled:opacity-50"
-              style={{ backgroundColor: "#5865F2" }}
+              className="flex w-full items-center justify-center gap-3 glass ghost-border rounded-lg bg-[#5865F2]/20 px-6 py-4 font-ui text-sm font-bold tracking-wide text-[#5865F2] transition-all bloom-hover active:scale-[0.98] disabled:opacity-50"
             >
               {oauthLoading === "discord" ? (
                 <LoadingSpinner />
