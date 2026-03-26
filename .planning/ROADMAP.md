@@ -16,6 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Core Quiz Flow** - Practice quiz and simulated DMV test with scoring, feedback, and post-quiz summaries (completed 2026-03-19)
 - [ ] **Phase 2.1: Auth, Profiles & Instrumentation** - INSERTED — Supabase Auth, user profiles with Stripe/tier columns, PostHog analytics, user-scoped data (UAT gap closure in progress)
 - [ ] **Phase 3: Analytics + Category Intelligence** - Persistent dashboard, category mastery tracking, trends, drill mode, and readiness score
+- [ ] **Phase 3.1: UI Polish & Style Reconciliation** - INSERTED — Glass cards, bloom-hover effects, neon borders, atmospheric background
 - [ ] **Phase 4: AI Question Variation Engine** - Analytics-targeted AI variation generation for weak areas, real-time fallback, missed question tracking
 - [ ] **Phase 5: Adaptive Learning** - Spaced repetition scheduling, flashcard mode, and missed question review with AI rephrasing
 
@@ -95,15 +96,16 @@ Plans:
 - [x] 03-03-PLAN.md — Category drill mode: practice page category filtering, mastery delta banner, smart actions wiring
 - [x] 03-04-PLAN.md — Gap closure: fix readiness gauge ring visibility and mastery delta banner for all user types
 
-### Phase 03.1: UI Polish & Style Reconciliation (INSERTED)
+### Phase 3.1: UI Polish & Style Reconciliation (INSERTED)
 
-**Goal:** [Urgent work - to be planned]
-**Requirements**: TBD
+**Goal:** Reconcile app interior visual language with landing page cyberpunk aesthetic — glass cards, bloom-hover effects, directional neon borders, and atmospheric background depth
+**Requirements**: (visual polish — no user-facing requirement IDs)
 **Depends on:** Phase 3
-**Plans:** 0 plans
+**Plans:** 2 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 03.1 to break down)
+- [ ] 03.1-01-PLAN.md — Card component glass defaults, CSS utility updates, atmospheric app background
+- [ ] 03.1-02-PLAN.md — Component-level glass treatment, bloom-hover effects, neon border accents, visual checkpoint
 
 ### Phase 4: AI Question Variation Engine
 **Goal**: Analytics-informed AI generates question variations targeted at weak categories, preventing memorization where it matters most while minimizing API costs
@@ -139,13 +141,14 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 2.1 -> 3 -> 4 -> 5
+Phases execute in numeric order: 1 -> 2 -> 2.1 -> 3 -> 3.1 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Question Bank | 4/4 | Complete | 2026-03-18 |
 | 2. Core Quiz Flow | 4/4 | Complete | 2026-03-19 |
 | 2.1. Auth, Profiles & Instrumentation | 2/4 | Gap closure | - |
-| 3. Analytics + Category Intelligence | 3/4 | Gap closure | - |
+| 3. Analytics + Category Intelligence | 4/4 | Complete | - |
+| 3.1. UI Polish & Style Reconciliation | 0/2 | Not started | - |
 | 4. AI Question Variation Engine | 0/0 | Not started | - |
 | 5. Adaptive Learning | 0/0 | Not started | - |
