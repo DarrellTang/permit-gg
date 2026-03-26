@@ -32,12 +32,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Category Drill
 
-- [ ] **DRILL-01**: User can select a specific category and practice only questions from that category
+- [x] **DRILL-01**: User can select a specific category and practice only questions from that category
 - [ ] **DRILL-02**: Analytics dashboard recommends which category to drill based on weakest areas
 
 ### Missed Question Review
 
-- [ ] **MISS-01**: System tracks all incorrectly answered questions per user
+- [x] **MISS-01**: System tracks all incorrectly answered questions per user
 - [ ] **MISS-02**: User can start a review session that re-quizzes missed concepts with AI-rephrased questions
 - [ ] **MISS-03**: Questions leave the missed pool once answered correctly in a review session
 
@@ -50,10 +50,10 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Analytics & Progress
 
 - [x] **ANAL-01**: After each quiz, user sees a summary with score, wrong answers with explanations, and category breakdown
-- [ ] **ANAL-02**: User has a persistent dashboard showing category mastery scores across all sessions
-- [ ] **ANAL-03**: Dashboard shows trends over time (improving/declining per category)
-- [ ] **ANAL-04**: Dashboard highlights weakest categories with drill recommendations
-- [ ] **ANAL-05**: User sees a readiness prediction score ("X% likely to pass")
+- [x] **ANAL-02**: User has a persistent dashboard showing category mastery scores across all sessions
+- [x] **ANAL-03**: Dashboard shows trends over time (improving/declining per category)
+- [x] **ANAL-04**: Dashboard highlights weakest categories with drill recommendations
+- [x] **ANAL-05**: User sees a readiness prediction score ("X% likely to pass")
 - [x] **ANAL-06**: All quiz history and progress persists across sessions (stored in Supabase)
 
 ### Spaced Repetition
@@ -123,19 +123,19 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SIM-02 | Phase 2 | Complete |
 | SIM-03 | Phase 2 | Complete |
 | SIM-04 | Phase 2 | Complete |
-| DRILL-01 | Phase 3 | Pending |
+| DRILL-01 | Phase 3 | Complete |
 | DRILL-02 | Phase 3 | Pending |
-| MISS-01 | Phase 3 | Pending |
+| MISS-01 | Phase 3 | Complete |
 | MISS-02 | Phase 5 | Pending |
 | MISS-03 | Phase 5 | Pending |
 | FLASH-01 | Phase 5 | Pending |
 | FLASH-02 | Phase 5 | Pending |
 | FLASH-03 | Phase 5 | Pending |
 | ANAL-01 | Phase 2 | Complete |
-| ANAL-02 | Phase 3 | Pending |
-| ANAL-03 | Phase 3 | Pending |
-| ANAL-04 | Phase 3 | Pending |
-| ANAL-05 | Phase 3 | Pending |
+| ANAL-02 | Phase 3 | Complete |
+| ANAL-03 | Phase 3 | Complete |
+| ANAL-04 | Phase 3 | Complete |
+| ANAL-05 | Phase 3 | Complete |
 | ANAL-06 | Phase 2 | Complete |
 | SRS-01 | Phase 5 | Pending |
 | SRS-02 | Phase 5 | Pending |
