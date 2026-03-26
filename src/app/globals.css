@@ -211,7 +211,7 @@ html.dark {
 .glass {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background-color: color-mix(in srgb, var(--surface-container) 80%, transparent);
+  background-color: oklch(from var(--card) l c h / 0.8);
 }
 
 .bloom-hover {
@@ -219,6 +219,15 @@ html.dark {
 }
 .bloom-hover:hover {
   box-shadow: 0 0 20px 2px rgba(255, 174, 216, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bloom-hover {
+    transition: none;
+  }
+  .bloom-hover:hover {
+    box-shadow: none;
+  }
 }
 
 .ghost-border {
