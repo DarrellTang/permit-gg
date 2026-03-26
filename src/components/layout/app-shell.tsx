@@ -18,7 +18,10 @@ export function AppShell({
   email,
 }: AppShellProps) {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="relative flex min-h-screen bg-background">
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_oklch(0.20_0.04_300)_0%,_transparent_70%)]" />
+      <div className="pointer-events-none fixed -top-32 -right-32 -z-10 h-96 w-96 rounded-full bg-neon-purple/[0.04] blur-[120px]" />
+
       <aside className="hidden lg:flex lg:w-64 lg:flex-col">
         <Sidebar
           displayName={displayName}
