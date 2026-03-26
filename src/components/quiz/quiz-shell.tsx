@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PRACTICE_DEFAULTS } from "@/lib/constants/quiz-config"
 import { createClient } from "@/lib/supabase/client"
+import { fetchUserAnalytics } from "@/server/actions/analytics"
 import type { QuizMode } from "@/lib/types/quiz"
 
 type ShellState = "pre-start" | "loading" | "active" | "complete"
@@ -22,9 +23,13 @@ type ShellState = "pre-start" | "loading" | "active" | "complete"
 interface QuizShellProps {
   mode: QuizMode
   questionCount?: number
+  categorySlug?: string | null
+  categoryName?: string | null
+  categoryIcon?: string | null
 }
 
-export function QuizShell({ mode }: QuizShellProps) {
+export function QuizShell({ mode, categorySlug, categoryName, categoryIcon }: QuizShellProps) {
+  const isDrill = !!categorySlug
   const [shellState, setShellState] = useState<ShellState>(
     mode === "practice" ? "pre-start" : "loading"
   )
@@ -34,20 +39,70 @@ export function QuizShell({ mode }: QuizShellProps) {
   const [simSubmitting, setSimSubmitting] = useState(false)
   const [answerRecorded, setAnswerRecorded] = useState(false)
   const [completionError, setCompletionError] = useState(false)
+  const [isGated, setIsGated] = useState(false)
   const prevAnswerCountRef = useRef(0)
 
   const quiz = useQuiz()
   const sounds = useQuizSounds()
 
+  useEffect(() => {
+    if (mode === "practice") {
+      const freeQuizUsed = localStorage.getItem("permit_free_quiz_used")
+      if (freeQuizUsed) {
+        const supabase = createClient()
+        supabase.auth.getUser().then(({ data: { user } }) => {
+          if (!user) {
+            setIsGated(true)
+            window.location.href = "/login?next=/practice"
+          }
+        })
+      }
+    }
+  }, [mode])
+
   const handleStart = useCallback(async () => {
+    if (mode === "practice") {
+      const freeQuizUsed = localStorage.getItem("permit_free_quiz_used")
+      if (freeQuizUsed) {
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+          const loginNext = isDrill
+            ? `/login?next=/practice?category=${categorySlug}`
+            : "/login?next=/practice"
+          window.location.href = loginNext
+          return
+        }
+      }
+    }
+
+    if (isDrill && categorySlug) {
+      try {
+        const analyticsData = await fetchUserAnalytics()
+        if (analyticsData) {
+          const catMastery = analyticsData.categories.find(
+            (c) => c.slug === categorySlug
+          )
+          if (catMastery) {
+            sessionStorage.setItem(
+              `drill_pre_mastery_${categorySlug}`,
+              String(catMastery.masteryPct)
+            )
+          }
+        }
+      } catch {
+        // Analytics fetch failed -- proceed without pre-drill mastery
+      }
+    }
+
     setShellState("loading")
     try {
-      await quiz.startQuiz(mode, mode === "practice" ? count : undefined)
+      await quiz.startQuiz(mode, mode === "practice" ? count : undefined, categorySlug || undefined)
       setShellState("active")
     } catch {
       setShellState("pre-start")
     }
-  }, [mode, count, quiz.startQuiz])
+  }, [mode, count, quiz.startQuiz, isDrill, categorySlug])
 
   const handleSubmit = useCallback(() => {
     if (mode === "practice") {
@@ -121,6 +176,19 @@ export function QuizShell({ mode }: QuizShellProps) {
     }
   }, [quiz.handleSimComplete])
 
+  if (shellState === "pre-start" && isGated) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background p-6">
+        <div className="text-center">
+          <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-neon-cyan border-t-transparent" />
+          <p className="mt-4 font-ui text-sm text-muted-foreground">
+            Redirecting to login...
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   if (shellState === "pre-start") {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background p-6">
@@ -130,11 +198,16 @@ export function QuizShell({ mode }: QuizShellProps) {
           className="w-full max-w-md space-y-8 text-center"
         >
           <div>
+            {isDrill && categoryIcon && (
+              <span className="mb-2 inline-block text-4xl">{categoryIcon}</span>
+            )}
             <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan">
-              Practice Quiz
+              {isDrill ? `Drill: ${categoryName}` : "Practice Quiz"}
             </h1>
             <p className="mt-2 font-ui text-sm text-muted-foreground">
-              Mixed topics from the CA DMV handbook
+              {isDrill
+                ? `Focused practice on ${categoryName} questions`
+                : "Mixed topics from the CA DMV handbook"}
             </p>
           </div>
 
@@ -152,7 +225,7 @@ export function QuizShell({ mode }: QuizShellProps) {
             onClick={handleStart}
             className="h-12 w-full bg-gradient-to-r from-neon-purple to-neon-cyan font-ui text-base font-bold text-white shadow-lg shadow-neon-purple/20 transition-all hover:shadow-neon-cyan/30"
           >
-            Start Practice
+            {isDrill ? "Start Drill" : "Start Practice"}
           </Button>
         </motion.div>
       </div>

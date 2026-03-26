@@ -29,10 +29,10 @@ export async function fetchQuestions(
 }
 
 export async function saveQuizResults(
-  input: SaveQuizResultsInput,
-  categorySlug?: string
+  input: SaveQuizResultsInput
 ) {
   const validated = SaveQuizResultsInput.parse(input)
+  const categorySlug = validated.categorySlug
   const supabase = await createClient()
 
   let userId: string | null = null

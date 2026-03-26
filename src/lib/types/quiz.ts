@@ -52,5 +52,6 @@ export const SaveQuizResultsInput = z.object({
   startedAt: z.string().datetime(),
   completedAt: z.string().datetime().nullable(),
   isComplete: z.boolean(),
+  categorySlug: z.string().optional(),
 })
 export type SaveQuizResultsInput = z.infer<typeof SaveQuizResultsInput>

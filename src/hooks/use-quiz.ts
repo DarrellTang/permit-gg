@@ -12,6 +12,7 @@ import type { QuizMode } from "@/lib/types/quiz"
 export function useQuiz() {
   const router = useRouter()
   const autoAdvanceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const categorySlugRef = useRef<string | undefined>(undefined)
 
   const mode = useQuizStore((s) => s.mode)
   const questions = useQuizStore((s) => s.questions)
@@ -67,12 +68,15 @@ export function useQuiz() {
   }, [])
 
   const startQuiz = useCallback(
-    async (quizMode: QuizMode, questionCount?: number) => {
-      const fetchedQuestions = await fetchQuestions(quizMode, questionCount)
+    async (quizMode: QuizMode, questionCount?: number, categorySlug?: string) => {
+      categorySlugRef.current = categorySlug
+      const fetchedQuestions = await fetchQuestions(quizMode, questionCount, categorySlug)
       initSession(fetchedQuestions, quizMode)
 
       if (quizMode === "sim") {
         analytics.simTestStarted()
+      } else if (categorySlug) {
+        analytics.categoryDrillStarted(categorySlug)
       } else {
         analytics.quizStarted(quizMode, fetchedQuestions.length)
       }
@@ -137,6 +141,7 @@ export function useQuiz() {
       startedAt,
       completedAt: null,
       isComplete: false,
+      categorySlug: categorySlugRef.current,
     })
 
     quitQuiz()
@@ -157,6 +162,7 @@ export function useQuiz() {
       startedAt,
       completedAt,
       isComplete: true,
+      categorySlug: categorySlugRef.current,
     })
 
     const finalPercentage =
@@ -188,10 +194,14 @@ export function useQuiz() {
       completeQuiz()
     }
 
+    const catParam = categorySlugRef.current
+      ? `&category=${categorySlugRef.current}`
+      : ""
+
     if (sessionId) {
-      router.push(`/practice/summary?session=${sessionId}`)
+      router.push(`/practice/summary?session=${sessionId}${catParam}`)
     } else {
-      router.push("/practice/summary")
+      router.push(`/practice/summary${catParam ? `?${catParam.slice(1)}` : ""}`)
     }
 
     return sessionId
