@@ -18,9 +18,10 @@ interface CategoryBreakdown {
 interface SmartActionsProps {
   mode: QuizMode
   categoryBreakdown: CategoryBreakdown[]
+  drillCategorySlug?: string | null
 }
 
-export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
+export function SmartActions({ mode, categoryBreakdown, drillCategorySlug }: SmartActionsProps) {
   const weakest =
     categoryBreakdown.length > 0
       ? categoryBreakdown.reduce((min, cat) =>
@@ -28,7 +29,11 @@ export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
         )
       : null
 
-  const tryAgainHref = mode === "practice" ? "/practice" : "/simulated-test"
+  const tryAgainHref = drillCategorySlug
+    ? `/practice?category=${drillCategorySlug}`
+    : mode === "practice"
+      ? "/practice"
+      : "/simulated-test"
 
   return (
     <motion.div
@@ -39,8 +44,7 @@ export function SmartActions({ mode, categoryBreakdown }: SmartActionsProps) {
     >
       {weakest && (
         <Link
-          href="/practice"
-          data-category={weakest.categorySlug}
+          href={`/practice?category=${weakest.categorySlug}`}
           onClick={() => analytics.categoryDrillStarted(weakest.categorySlug)}
         >
           <div className="relative overflow-hidden rounded-xl bg-[var(--surface-container-low)] ghost-border p-4 transition-all bloom-hover">

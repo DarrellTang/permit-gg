@@ -6,6 +6,7 @@ import { useQuizStore } from "@/stores/quiz-store"
 import { computeQuizSummary } from "@/lib/utils/quiz-summary"
 import { fetchSessionSummary } from "@/server/actions/quiz"
 import { ScoreReveal } from "@/components/summary/score-reveal"
+import { MasteryDeltaBanner } from "@/components/summary/mastery-delta-banner"
 import { QuizStats } from "@/components/summary/quiz-stats"
 import { CategoryRadar } from "@/components/summary/category-radar"
 import { WrongAnswerCarousel } from "@/components/summary/wrong-answer-carousel"
@@ -28,6 +29,7 @@ export default function PracticeSummaryPage() {
 function PracticeSummaryContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get("session")
+  const categorySlug = searchParams.get("category")
 
   const answers = useQuizStore((s) => s.answers)
   const questions = useQuizStore((s) => s.questions)
@@ -38,6 +40,7 @@ function PracticeSummaryContent() {
   const [remoteSummary, setRemoteSummary] = useState<QuizSummary | null>(null)
   const [remoteBestStreak, setRemoteBestStreak] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [fetchError, setFetchError] = useState(false)
 
   useEffect(() => {
     if (sessionStartTime > 0) {
@@ -59,9 +62,13 @@ function PracticeSummaryContent() {
             setRemoteSummary(result.summary)
             setRemoteBestStreak(result.bestStreak)
             setTotalTimeMs(result.totalTimeMs)
+          } else {
+            setFetchError(true)
           }
         })
-        .catch(() => {})
+        .catch(() => {
+          setFetchError(true)
+        })
         .finally(() => setLoading(false))
     }
   }, [localSummary, sessionId])
@@ -90,6 +97,8 @@ function PracticeSummaryContent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/30">
       <div className="mx-auto max-w-lg space-y-8 px-4 py-8 sm:px-6">
+        {categorySlug && <MasteryDeltaBanner categorySlug={categorySlug} />}
+
         <ScoreReveal score={summary.score} total={summary.total} />
 
         <QuizStats
@@ -111,6 +120,7 @@ function PracticeSummaryContent() {
         <SmartActions
           mode="practice"
           categoryBreakdown={summary.categoryBreakdown}
+          drillCategorySlug={categorySlug}
         />
       </div>
     </div>
