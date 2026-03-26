@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03.1-01-PLAN.md
-last_updated: "2026-03-26T20:18:09.562Z"
+stopped_at: Completed 03.1-02-PLAN.md
+last_updated: "2026-03-26T20:22:25.772Z"
 progress:
   total_phases: 7
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 18
-  completed_plans: 17
+  completed_plans: 18
 ---
 
 # Project State
@@ -59,6 +59,7 @@ Plan: 2 of 2
 | Phase 03 P03 | 4min | 2 tasks | 8 files |
 | Phase 03 P04 | 2min | 2 tasks | 4 files |
 | Phase 03.1 P01 | 2min | 2 tasks | 3 files |
+| Phase 03.1 P02 | 2min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -111,6 +112,9 @@ Recent decisions affecting current work:
 - [Phase 03]: Local mastery computation from quiz store answers as fallback for anonymous users
 - [Phase 03.1]: Used oklch relative color syntax for glass background instead of color-mix for landing page consistency
 - [Phase 03.1]: Atmospheric blur blob uses bg-neon-purple/[0.04] -- extremely subtle to avoid quiz distraction
+- [Phase 03.1]: Replaced inline lavender glow with bloom-hover class for consistent pink glow per D-06
+- [Phase 03.1]: Non-interactive cards use empty className inheriting Card glass defaults per D-12
+- [Phase 03.1]: bg-card/XX Tailwind opacity shorthand replacing surface-container CSS vars for dimmed/hover states
 
 ### Pending Todos
 
@@ -126,6 +130,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-26T20:18:09.561Z
-Stopped at: Completed 03.1-01-PLAN.md
+Last session: 2026-03-26T20:22:25.770Z
+Stopped at: Completed 03.1-02-PLAN.md
 Resume file: None
