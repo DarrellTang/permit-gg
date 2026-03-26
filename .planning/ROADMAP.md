@@ -109,7 +109,7 @@ Plans:
 - [x] 03.1-03-PLAN.md — Gap closure: sharpen border radii, boost question card border, cyberpunk OAuth buttons, neon-glow CTAs
 - [x] 03.1-04-PLAN.md — StitchU redesign: CSS utilities (bg-grid, bloom filters), sidebar redesign with right-border accents and Settings/Logout
 - [ ] 03.1-05-PLAN.md — StitchU redesign: SVG circle readiness gauge, hero section layout, category card status badges and progress bars
-- [ ] 03.1-06-PLAN.md — StitchU redesign: terminal-style quiz history with session log header and fetch-more link
+- [x] 03.1-06-PLAN.md — StitchU redesign: terminal-style quiz history with session log header and fetch-more link
 
 ### Phase 4: AI Question Variation Engine
 **Goal**: Analytics-informed AI generates question variations targeted at weak categories, preventing memorization where it matters most while minimizing API costs
