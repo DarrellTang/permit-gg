@@ -39,7 +39,7 @@ Users can see exactly where they are strong and weak, with data-driven recommend
 ### Trend Visualization
 - **D-16:** Per-session data points — each quiz session is a data point on trend lines
 - **D-17:** Mini sparklines on category cards showing last 5-10 sessions — compact and glanceable
-- **D-18:** Full trend chart available on detail view when tapping into a category
+- **D-18:** ~~Full trend chart available on detail view when tapping into a category~~ **DEFERRED** — D-07/D-12 take precedence (tapping a category card enters drill mode, not a detail view). A dedicated category detail page with full trend chart is future work, possibly a long-press or secondary interaction pattern. The sparkline on the card (D-17) provides the trend signal for now.
 
 ### Claude's Discretion
 - Exact sparkline implementation (recharts mini chart vs custom SVG)
@@ -101,6 +101,7 @@ No external specs — requirements fully captured in decisions above and REQUIRE
 - Spaced repetition scheduling — Phase 5
 - Flashcard mode — Phase 5
 - Missed question review sessions — Phase 5
+- D-18: Full trend chart on category detail view — future work (D-07/D-12 use tap for drill mode; sparklines on cards cover trend signal for now)
 
 </deferred>
 
