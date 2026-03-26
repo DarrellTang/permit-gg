@@ -104,7 +104,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 03.1-01-PLAN.md — Card component glass defaults, CSS utility updates, atmospheric app background
+- [x] 03.1-01-PLAN.md — Card component glass defaults, CSS utility updates, atmospheric app background
 - [ ] 03.1-02-PLAN.md — Component-level glass treatment, bloom-hover effects, neon border accents, visual checkpoint
 
 ### Phase 4: AI Question Variation Engine
