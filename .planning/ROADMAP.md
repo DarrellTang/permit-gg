@@ -91,7 +91,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — Analytics data foundation: types, RPC migration, server actions, readiness/mastery utils, category question selection, unit tests
-- [ ] 03-02-PLAN.md — Dashboard UI: readiness gauge, category card grid with sparklines, quiz history, nav cleanup
+- [x] 03-02-PLAN.md — Dashboard UI: readiness gauge, category card grid with sparklines, quiz history, nav cleanup
 - [ ] 03-03-PLAN.md — Category drill mode: practice page category filtering, mastery delta banner, smart actions wiring
 
 ### Phase 4: AI Question Variation Engine

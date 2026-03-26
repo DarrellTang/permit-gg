@@ -33,7 +33,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Category Drill
 
 - [x] **DRILL-01**: User can select a specific category and practice only questions from that category
-- [ ] **DRILL-02**: Analytics dashboard recommends which category to drill based on weakest areas
+- [x] **DRILL-02**: Analytics dashboard recommends which category to drill based on weakest areas
 
 ### Missed Question Review
 
@@ -124,7 +124,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SIM-03 | Phase 2 | Complete |
 | SIM-04 | Phase 2 | Complete |
 | DRILL-01 | Phase 3 | Complete |
-| DRILL-02 | Phase 3 | Pending |
+| DRILL-02 | Phase 3 | Complete |
 | MISS-01 | Phase 3 | Complete |
 | MISS-02 | Phase 5 | Pending |
 | MISS-03 | Phase 5 | Pending |
