@@ -93,7 +93,7 @@ Plans:
 - [x] 03-01-PLAN.md — Analytics data foundation: types, RPC migration, server actions, readiness/mastery utils, category question selection, unit tests
 - [x] 03-02-PLAN.md — Dashboard UI: readiness gauge, category card grid with sparklines, quiz history, nav cleanup
 - [x] 03-03-PLAN.md — Category drill mode: practice page category filtering, mastery delta banner, smart actions wiring
-- [ ] 03-04-PLAN.md — Gap closure: fix readiness gauge ring visibility and mastery delta banner for all user types
+- [x] 03-04-PLAN.md — Gap closure: fix readiness gauge ring visibility and mastery delta banner for all user types
 
 ### Phase 4: AI Question Variation Engine
 **Goal**: Analytics-informed AI generates question variations targeted at weak categories, preventing memorization where it matters most while minimizing API costs
