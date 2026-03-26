@@ -106,7 +106,7 @@ Plans:
 Plans:
 - [x] 03.1-01-PLAN.md — Card component glass defaults, CSS utility updates, atmospheric app background
 - [x] 03.1-02-PLAN.md — Component-level glass treatment, bloom-hover effects, neon border accents, visual checkpoint
-- [ ] 03.1-03-PLAN.md — Gap closure: sharpen border radii, boost question card border, cyberpunk OAuth buttons, neon-glow CTAs
+- [x] 03.1-03-PLAN.md — Gap closure: sharpen border radii, boost question card border, cyberpunk OAuth buttons, neon-glow CTAs
 
 ### Phase 4: AI Question Variation Engine
 **Goal**: Analytics-informed AI generates question variations targeted at weak categories, preventing memorization where it matters most while minimizing API costs
