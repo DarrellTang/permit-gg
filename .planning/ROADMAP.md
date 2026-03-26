@@ -107,7 +107,7 @@ Plans:
 - [x] 03.1-01-PLAN.md — Card component glass defaults, CSS utility updates, atmospheric app background
 - [x] 03.1-02-PLAN.md — Component-level glass treatment, bloom-hover effects, neon border accents, visual checkpoint
 - [x] 03.1-03-PLAN.md — Gap closure: sharpen border radii, boost question card border, cyberpunk OAuth buttons, neon-glow CTAs
-- [ ] 03.1-04-PLAN.md — StitchU redesign: CSS utilities (bg-grid, bloom filters), sidebar redesign with right-border accents and Settings/Logout
+- [x] 03.1-04-PLAN.md — StitchU redesign: CSS utilities (bg-grid, bloom filters), sidebar redesign with right-border accents and Settings/Logout
 - [ ] 03.1-05-PLAN.md — StitchU redesign: SVG circle readiness gauge, hero section layout, category card status badges and progress bars
 - [ ] 03.1-06-PLAN.md — StitchU redesign: terminal-style quiz history with session log header and fetch-more link
 
