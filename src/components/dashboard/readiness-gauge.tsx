@@ -16,40 +16,39 @@ export function ReadinessGauge({ score, message }: ReadinessGaugeProps) {
   const radius = 90
   const strokeWidth = 20
   const cx = 120
-  const cy = 100
-  const circumference = Math.PI * radius
-  const fillLength = (score / 100) * circumference
-  const gapLength = circumference - fillLength
+  const cy = 110
+  const halfCircumference = Math.PI * radius
+  const fillLength = (score / 100) * halfCircumference
+  const gapLength = halfCircumference - fillLength
+
+  // Semicircle arc path from left to right (180° arc)
+  const arcPath = `M ${cx - radius} ${cy} A ${radius} ${radius} 0 0 1 ${cx + radius} ${cy}`
 
   return (
     <section className="flex flex-col items-center">
       <div className="w-full max-w-[280px]">
         <svg
-          viewBox="0 0 240 130"
+          viewBox="0 0 240 140"
           className="w-full"
           aria-label={`Readiness score: ${score}%`}
         >
           {/* Track (unfilled arc) */}
           <path
-            d={`M ${cx - radius} ${cy} A ${radius} ${radius} 0 0 1 ${cx + radius} ${cy}`}
+            d={arcPath}
             fill="none"
             stroke="hsl(var(--muted) / 0.4)"
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />
-          {/* Filled arc */}
+          {/* Filled arc — same path, clipped by dasharray */}
           {score > 0 && (
-            <circle
-              cx={cx}
-              cy={cy}
-              r={radius}
+            <path
+              d={arcPath}
               fill="none"
               stroke={color}
               strokeWidth={strokeWidth}
               strokeLinecap="round"
-              strokeDasharray={`${fillLength} ${gapLength}`}
-              strokeDashoffset={0}
-              transform={`rotate(180 ${cx} ${cy})`}
+              strokeDasharray={`${fillLength} ${halfCircumference}`}
               style={{
                 filter: `drop-shadow(0 0 8px ${color}80)`,
               }}
@@ -57,7 +56,7 @@ export function ReadinessGauge({ score, message }: ReadinessGaugeProps) {
           )}
         </svg>
 
-        <div className="flex flex-col items-center text-center -mt-10">
+        <div className="flex flex-col items-center text-center -mt-12">
           <span
             className="font-display text-5xl font-bold"
             style={{ color }}
