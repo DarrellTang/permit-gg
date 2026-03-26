@@ -32,7 +32,7 @@ export function QuizStats({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.4 }}
     >
-      <Card className="border-0 glass ghost-border">
+      <Card className="">
         <CardContent className="p-0">
           <div className="grid grid-cols-3">
             <div className="flex flex-col items-center gap-1 py-4">

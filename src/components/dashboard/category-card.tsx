@@ -22,7 +22,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link href={`/practice?category=${category.slug}`}>
       <Card
-        className="group border-0 bg-[var(--surface-container-low)] transition-all hover:bg-[var(--surface-container-high)] hover:shadow-[0_0_20px_2px_rgba(255,174,216,0.15)] cursor-pointer h-full"
+        className="group transition-all bloom-hover cursor-pointer h-full"
         style={{
           borderLeft: hasData ? `3px solid ${color}` : undefined,
         }}

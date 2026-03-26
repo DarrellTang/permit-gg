@@ -29,7 +29,7 @@ export function DmvResultLetter({
         }}
         className="w-full max-w-lg"
       >
-        <div className="rounded-xl glass ghost-border bg-[#faf9f6] dark:bg-[var(--surface-container)]/90 p-8">
+        <div className="rounded-xl glass ghost-border bg-[#faf9f6] dark:bg-card/90 p-8">
           <div className="space-y-6 text-center">
             <div className="space-y-1">
               <p className="font-display text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">

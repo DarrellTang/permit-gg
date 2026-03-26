@@ -61,7 +61,7 @@ export function QuizHistoryList({ sessions }: QuizHistoryListProps) {
       <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-muted-foreground">
         Recent Quizzes
       </h2>
-      <Card className="border-0 bg-[var(--surface-container-low)]">
+      <Card className="">
         <CardHeader className="pb-2">
           <CardTitle className="font-ui text-xs text-muted-foreground">
             Last {recent.length} sessions
@@ -71,7 +71,7 @@ export function QuizHistoryList({ sessions }: QuizHistoryListProps) {
           {recent.map((session) => (
             <div
               key={session.sessionId}
-              className="flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-[var(--surface-container-high)]"
+              className="flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-card/60"
             >
               <div className="flex items-center gap-3">
                 <Badge

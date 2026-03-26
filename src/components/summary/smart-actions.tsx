@@ -47,7 +47,7 @@ export function SmartActions({ mode, categoryBreakdown, drillCategorySlug }: Sma
           href={`/practice?category=${weakest.categorySlug}`}
           onClick={() => analytics.categoryDrillStarted(weakest.categorySlug)}
         >
-          <div className="relative overflow-hidden rounded-xl bg-[var(--surface-container-low)] ghost-border p-4 transition-all bloom-hover">
+          <div className="relative overflow-hidden rounded-xl glass ghost-border p-4 transition-all bloom-hover">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <svg
@@ -86,7 +86,7 @@ export function SmartActions({ mode, categoryBreakdown, drillCategorySlug }: Sma
           <Button
             variant="outline"
             size="lg"
-            className="h-12 w-full font-ui text-sm ghost-border border-0 bg-[var(--surface-container-low)] hover:bg-[var(--surface-container-high)]"
+            className="h-12 w-full font-ui text-sm ghost-border border-0 glass hover:bg-card/60"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ export function SmartActions({ mode, categoryBreakdown, drillCategorySlug }: Sma
           <Button
             variant="outline"
             size="lg"
-            className="h-12 w-full font-ui text-sm ghost-border border-0 bg-[var(--surface-container-low)] hover:bg-[var(--surface-container-high)]"
+            className="h-12 w-full font-ui text-sm ghost-border border-0 glass hover:bg-card/60"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
