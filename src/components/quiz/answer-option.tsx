@@ -58,7 +58,7 @@ export function AnswerOption({
           : {}
       }
       className={cn(
-        "flex min-h-[56px] w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-ui text-sm transition-all duration-200",
+        "flex min-h-[56px] w-full items-center gap-3 rounded-lg px-4 py-3 text-left font-ui text-sm transition-all duration-200",
         variant === "idle" &&
           "cursor-pointer border-0 glass ghost-border bloom-hover hover:scale-[1.01] active:scale-[0.99]",
         variant === "selected" &&
