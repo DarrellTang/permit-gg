@@ -43,23 +43,23 @@ export default async function DashboardPage() {
                 <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan lg:text-4xl">
                   Welcome back, {displayName}
                 </h1>
-                <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; Your journey continues</p>
+                <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; YOUR QUEST CONTINUES</p>
                 <p className="font-ui text-base text-muted-foreground">
-                  Your CA permit test prep starts here
+                  Start studying to unlock your readiness score. 15 mins a day is all it takes.
                 </p>
               </div>
               <div className="flex gap-3">
                 <Link
                   href="/practice"
-                  className="bloom-secondary neon-glow inline-block rounded-lg bg-neon-cyan/20 px-4 py-2 font-ui text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/30"
+                  className="bloom-secondary neon-glow inline-block bg-neon-cyan/20 px-6 py-3 font-display text-sm font-bold tracking-wider text-neon-cyan transition-all hover:bg-neon-cyan/30 hover:scale-105 active:scale-95"
                 >
-                  Start Practice
+                  START PRACTICE
                 </Link>
                 <Link
                   href="/simulated-test"
-                  className="bloom-primary neon-glow inline-block rounded-lg bg-neon-purple/20 px-4 py-2 font-ui text-sm font-semibold text-neon-purple transition-all hover:bg-neon-purple/30"
+                  className="bloom-primary neon-glow inline-block border border-neon-purple px-6 py-3 font-display text-sm font-bold tracking-wider text-neon-purple transition-all hover:bg-neon-purple/10 hover:scale-105 active:scale-95"
                 >
-                  Try Sim Test
+                  RUN SIMULATION
                 </Link>
               </div>
             </div>
@@ -82,23 +82,23 @@ export default async function DashboardPage() {
               <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan lg:text-4xl">
                 Welcome back, {displayName}
               </h1>
-              <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; Your journey continues</p>
+              <p className="font-ui text-xs text-neon-lavender/60 tracking-widest mt-1">&#10022; SYNC STATUS: ACTIVE</p>
               <p className="font-ui text-base text-muted-foreground">
-                Your CA permit test prep starts here
+                Your readiness is building. Keep drilling your weak spots to reach 83%.
               </p>
             </div>
             <div className="flex gap-3">
               <Link
                 href="/practice"
-                className="bloom-secondary neon-glow inline-block rounded-lg bg-neon-cyan/20 px-4 py-2 font-ui text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/30"
+                className="bloom-secondary neon-glow inline-block bg-neon-cyan/20 px-6 py-3 font-display text-sm font-bold tracking-wider text-neon-cyan transition-all hover:bg-neon-cyan/30 hover:scale-105 active:scale-95"
               >
-                Quick Practice
+                QUICK DRILL
               </Link>
               <Link
                 href="/simulated-test"
-                className="bloom-primary neon-glow inline-block rounded-lg bg-neon-purple/20 px-4 py-2 font-ui text-sm font-semibold text-neon-purple transition-all hover:bg-neon-purple/30"
+                className="bloom-primary neon-glow inline-block border border-neon-purple px-6 py-3 font-display text-sm font-bold tracking-wider text-neon-purple transition-all hover:bg-neon-purple/10 hover:scale-105 active:scale-95"
               >
-                Sim Test
+                RUN SIMULATION
               </Link>
             </div>
           </div>

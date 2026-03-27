@@ -65,10 +65,13 @@ export function Sidebar({ displayName, avatarUrl, email }: SidebarProps) {
 
   return (
     <div className="flex h-full w-64 flex-col glass border-r border-neon-pink/15">
-      <div className="flex h-16 items-center px-6">
+      <div className="px-6 pt-6 pb-2">
         <Link href="/dashboard" className="font-display text-xl font-bold tracking-wider text-neon-pink neon-text">
           PERMIT.GG
         </Link>
+        <p className="font-ui text-[10px] tracking-[0.2em] text-neon-mint/50 uppercase mt-1">
+          CA DMV PREP // ACTIVE
+        </p>
       </div>
 
       <nav className="flex-1 space-y-1 px-3 py-4">

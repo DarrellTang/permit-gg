@@ -63,8 +63,8 @@ export function QuizHistoryList({ sessions }: QuizHistoryListProps) {
 
   return (
     <section>
-      <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-muted-foreground">
-        Recent Quizzes
+      <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+        <span className="text-neon-mint">✦</span> RECENT SESSIONS
       </h2>
       <Card className="">
         <CardHeader className="border-b border-neon-cyan/10 pb-3">

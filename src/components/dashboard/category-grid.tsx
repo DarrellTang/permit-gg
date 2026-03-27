@@ -14,8 +14,8 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
 
   return (
     <section>
-      <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-muted-foreground">
-        Category Mastery
+      <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+        <span className="text-neon-pink">✦</span> CATEGORY MASTERY
       </h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {sorted.map((category) => (
