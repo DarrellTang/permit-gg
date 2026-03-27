@@ -14,9 +14,14 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
 
   return (
     <section>
-      <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-        <span className="text-neon-pink">✦</span> CATEGORY MASTERY
-      </h2>
+      <div className="mb-4 flex items-end justify-between">
+        <h2 className="font-display text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+          <span className="text-neon-pink">✦</span> CATEGORY MASTERY
+        </h2>
+        <p className="font-ui text-[10px] text-muted-foreground/50 uppercase tracking-widest">
+          Click a category to drill
+        </p>
+      </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {sorted.map((category) => (
           <CategoryCard key={category.slug} category={category} />
