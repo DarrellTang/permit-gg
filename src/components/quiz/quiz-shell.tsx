@@ -196,43 +196,111 @@ export function QuizShell({ mode, categorySlug, categoryName, categoryIcon }: Qu
   }
 
   if (shellState === "pre-start") {
+    const QUESTION_OPTIONS = [
+      { value: 10, label: "Quick Scan" },
+      { value: 15, label: "Standard" },
+      { value: 20, label: "Extended" },
+    ]
+
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-6">
+      <div className="flex min-h-screen items-center justify-center p-6 relative">
+        <div className="pointer-events-none absolute top-0 right-0 h-96 w-96 rounded-full bg-neon-pink/[0.04] blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-10 left-10 h-64 w-64 rounded-full bg-neon-mint/[0.04] blur-[100px]" />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md space-y-8 text-center"
+          className="w-full max-w-xl"
         >
-          <div>
-            {isDrill && categoryIcon && (
-              <span className="mb-2 inline-block text-4xl">{categoryIcon}</span>
-            )}
-            <h1 className="font-display text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan">
-              {isDrill ? `Drill: ${categoryName}` : "Practice Quiz"}
-            </h1>
-            <p className="mt-2 font-ui text-sm text-muted-foreground">
-              {isDrill
-                ? `Focused practice on ${categoryName} questions`
-                : "Mixed topics from the CA DMV handbook"}
-            </p>
+          {/* Breadcrumb */}
+          <div className="mb-6 flex items-center gap-2 font-ui text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase">
+            <span>{isDrill ? "DRILL" : "PRACTICE"}</span>
+            <span>›</span>
+            <span className="text-neon-mint">{isDrill ? categoryName?.toUpperCase() : "PARAMETER SETUP"}</span>
           </div>
 
-          <div className="flex items-center justify-center gap-3 relative z-0">
-            <span className="font-display text-5xl font-bold text-neon-cyan">
-              {count}
-            </span>
-            <span className="font-body text-lg text-muted-foreground">
-              questions
-            </span>
-            <QuestionCountConfig count={count} onChange={setCount} />
-          </div>
+          {/* Glass panel with gradient border */}
+          <div className="p-[1px] bg-gradient-to-br from-neon-pink/30 via-transparent to-neon-mint/20">
+            <div className="glass p-8 md:p-10 relative overflow-hidden">
+              <div className="pointer-events-none absolute -top-12 -right-12 h-48 w-48 border border-neon-pink/5 rotate-45" />
 
-          <Button
-            onClick={handleStart}
-            className="neon-glow h-12 w-full bg-gradient-to-r from-neon-purple to-neon-cyan font-ui text-base font-bold text-white shadow-lg shadow-neon-purple/20 transition-all hover:shadow-neon-cyan/30"
-          >
-            {isDrill ? "Start Drill" : "Start Practice"}
-          </Button>
+              <div className="text-center mb-10">
+                <div className="inline-block px-3 py-1 bg-neon-mint/10 text-neon-mint font-ui text-[10px] tracking-[0.2em] uppercase mb-4 border border-neon-mint/20">
+                  {isDrill ? `CATEGORY: ${categoryName?.toUpperCase()}` : "MODE: PRACTICE"}
+                </div>
+
+                {isDrill && categoryIcon && (
+                  <span className="mb-2 block text-4xl">{categoryIcon}</span>
+                )}
+
+                <h1 className="font-display text-3xl md:text-4xl font-bold tracking-wider uppercase mb-3">
+                  {isDrill ? (
+                    <>Drill <span className="text-neon-pink">{categoryName}</span></>
+                  ) : (
+                    <>Practice <span className="text-neon-pink">Session</span></>
+                  )}
+                </h1>
+                <p className="font-body text-sm text-muted-foreground max-w-md mx-auto">
+                  {isDrill
+                    ? `Focused questions on ${categoryName}. Sharpen your weak spots.`
+                    : "Mixed topics from the CA DMV handbook. Select your question count to begin."}
+                </p>
+              </div>
+
+              {/* Question count grid */}
+              <div className="space-y-4 mb-10">
+                <div className="flex items-center justify-between border-b border-muted/10 pb-3">
+                  <span className="font-ui text-xs font-bold text-neon-lavender tracking-[0.15em] uppercase">
+                    Question Volume
+                  </span>
+                  <span className="font-body text-[10px] text-muted-foreground/50 uppercase tracking-[0.15em]">
+                    Select Count
+                  </span>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  {QUESTION_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => setCount(opt.value)}
+                      className={`group relative py-5 text-center transition-all active:scale-95 cursor-pointer ${
+                        count === opt.value
+                          ? "bg-neon-pink/15 border-2 border-neon-pink shadow-[0_0_20px_rgba(255,174,216,0.2)]"
+                          : "glass ghost-border hover:border-neon-pink/40"
+                      }`}
+                    >
+                      <div className={`font-display text-2xl font-bold ${count === opt.value ? "text-neon-pink" : "group-hover:text-neon-pink"}`}>
+                        {opt.value}
+                      </div>
+                      <div className={`text-[8px] font-ui uppercase tracking-[0.2em] mt-1 ${count === opt.value ? "text-neon-pink/80" : "text-muted-foreground group-hover:text-neon-pink/60"}`}>
+                        {opt.label}
+                      </div>
+                      {opt.value === 15 && (
+                        <div className="absolute top-1 right-1 text-neon-pink text-[10px]">✦</div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="text-center">
+                <button
+                  onClick={handleStart}
+                  className="group relative inline-flex items-center justify-center w-full md:w-auto overflow-hidden transition-all active:scale-95 cursor-pointer"
+                >
+                  <div className="absolute inset-0 bg-neon-pink opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
+                  <div className="relative px-16 py-5 bg-gradient-to-r from-neon-purple via-neon-pink to-neon-purple font-display text-lg font-bold tracking-[0.3em] text-white uppercase shadow-[0_0_30px_rgba(191,42,141,0.4)]">
+                    {isDrill ? "START DRILL" : "START SESSION"}
+                  </div>
+                  <span className="absolute top-2 left-2 text-white/60 text-[10px]">✦</span>
+                  <span className="absolute bottom-2 right-2 text-white/60 text-[10px]">✦</span>
+                </button>
+                <p className="mt-6 font-ui text-[10px] text-muted-foreground/40 tracking-[0.2em] uppercase">
+                  {isDrill ? "Drill your weak spots" : "Verify parameters before entry"}
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     )
