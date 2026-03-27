@@ -92,7 +92,7 @@ export default async function DashboardPage() {
                 href="/practice"
                 className="bloom-secondary neon-glow inline-block bg-neon-cyan/20 px-6 py-3 font-display text-sm font-bold tracking-wider text-neon-cyan transition-all hover:bg-neon-cyan/30 hover:scale-105 active:scale-95"
               >
-                QUICK DRILL
+                START PRACTICE
               </Link>
               <Link
                 href="/simulated-test"
