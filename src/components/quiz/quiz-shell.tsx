@@ -385,54 +385,58 @@ export function QuizShell({ mode, categorySlug, categoryName, categoryIcon }: Qu
     quiz.allSimQuestionsAnswered &&
     !quiz.reviewingFlagged
 
+  const sessionLabel = isDrill
+    ? `DRILL: ${categoryName?.toUpperCase()}`
+    : mode === "sim"
+      ? "SIMULATED DMV TEST"
+      : "PRACTICE SESSION"
+
   return (
     <div
-      className={`min-h-screen overflow-y-auto bg-background ${
+      className={`min-h-screen overflow-y-auto relative ${
         mode === "sim" ? "ring-2 ring-inset ring-neon-purple/30" : ""
       }`}
     >
+      <div className="pointer-events-none fixed top-0 right-0 h-64 w-64 rounded-full bg-neon-pink/[0.03] blur-[100px]" />
+
       {mode === "practice" && (
         <StreakCelebration streak={quiz.streak} show={showStreak} />
       )}
       <div className="mx-auto max-w-2xl p-4 sm:p-6">
-        <div className="mb-6 flex items-center gap-3">
-          {mode === "sim" && (
-            <Badge className="shrink-0 bg-neon-purple/20 text-neon-purple border-neon-purple/30 font-ui text-[10px] font-bold uppercase tracking-widest">
-              SIM
-            </Badge>
-          )}
-          <div className="flex-1">
-            <QuizProgressBar
-              current={
-                quiz.allSimQuestionsAnswered
-                  ? quiz.totalQuestions - 1
-                  : quiz.currentIndex
-              }
-              total={quiz.totalQuestions}
-              correctCount={quiz.score}
-              streak={mode === "practice" ? quiz.streak : 0}
-            />
+        {/* Header bar */}
+        <div className="mb-2 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-ui text-[10px] tracking-[0.15em] text-muted-foreground/50 uppercase">
+            {mode === "sim" && (
+              <Badge className="shrink-0 bg-neon-purple/20 text-neon-purple border-neon-purple/30 font-ui text-[10px] font-bold uppercase tracking-widest">
+                SIM
+              </Badge>
+            )}
+            <span className="text-neon-mint">{sessionLabel}</span>
           </div>
           <button
             type="button"
             onClick={() => setQuitDialogOpen(true)}
-            className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="p-2 text-muted-foreground/50 transition-colors hover:text-neon-pink"
             aria-label="Quit quiz"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-5 w-5"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
+        </div>
+
+        <div className="mb-6">
+          <QuizProgressBar
+            current={
+              quiz.allSimQuestionsAnswered
+                ? quiz.totalQuestions - 1
+                : quiz.currentIndex
+            }
+            total={quiz.totalQuestions}
+            correctCount={quiz.score}
+            streak={mode === "practice" ? quiz.streak : 0}
+          />
         </div>
 
         <AnimatePresence>

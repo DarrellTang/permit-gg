@@ -92,41 +92,38 @@ export function QuestionCard({
             <Button
               onClick={onReturnToReview}
               variant="ghost"
-              className="font-ui text-sm text-muted-foreground hover:text-foreground"
+              className="font-display text-xs tracking-wider text-muted-foreground hover:text-foreground uppercase"
             >
               Back to Review
             </Button>
           )}
 
           {isFlaggedReview && onSubmitFlagged ? (
-            <Button
+            <button
               onClick={onSubmitFlagged}
               disabled={answerState !== "selected"}
-              className="min-w-[120px] bg-neon-cyan/20 font-ui text-sm font-semibold text-neon-cyan hover:bg-neon-cyan/30 disabled:opacity-40"
-              variant="ghost"
+              className="min-w-[140px] py-3 bg-neon-cyan/15 border border-neon-cyan/30 font-display text-xs font-bold tracking-[0.15em] text-neon-cyan uppercase transition-all hover:bg-neon-cyan/25 hover:shadow-[0_0_15px_rgba(169,255,222,0.3)] disabled:opacity-30 disabled:hover:shadow-none active:scale-95 cursor-pointer"
             >
-              Update Answer
-            </Button>
+              UPDATE ANSWER
+            </button>
           ) : (
             <>
               {!isRevealed && (
-                <Button
+                <button
                   onClick={onSubmit}
                   disabled={answerState !== "selected"}
-                  className="min-w-[120px] bg-neon-cyan/20 font-ui text-sm font-semibold text-neon-cyan hover:bg-neon-cyan/30 disabled:opacity-40"
-                  variant="ghost"
+                  className="min-w-[140px] py-3 bg-neon-cyan/15 border border-neon-cyan/30 font-display text-xs font-bold tracking-[0.15em] text-neon-cyan uppercase transition-all hover:bg-neon-cyan/25 hover:shadow-[0_0_15px_rgba(169,255,222,0.3)] disabled:opacity-30 disabled:hover:shadow-none active:scale-95 cursor-pointer"
                 >
-                  Submit
-                </Button>
+                  SUBMIT
+                </button>
               )}
               {isRevealed && !isCorrect && (
-                <Button
+                <button
                   onClick={onNext}
-                  className="min-w-[120px] bg-neon-purple/20 font-ui text-sm font-semibold text-neon-purple hover:bg-neon-purple/30"
-                  variant="ghost"
+                  className="min-w-[140px] py-3 bg-neon-purple/15 border border-neon-purple/30 font-display text-xs font-bold tracking-[0.15em] text-neon-purple uppercase transition-all hover:bg-neon-purple/25 hover:shadow-[0_0_15px_rgba(234,178,255,0.3)] active:scale-95 cursor-pointer"
                 >
-                  {isLastQuestion ? "Finish" : "Next"}
-                </Button>
+                  {isLastQuestion ? "FINISH" : "NEXT →"}
+                </button>
               )}
             </>
           )}
