@@ -411,7 +411,7 @@ export function QuizShell({ mode, categorySlug, categoryName, categoryIcon }: Qu
                 SIM
               </Badge>
             )}
-            <span className="text-neon-mint">{sessionLabel}</span>
+            <span className="text-neon-pink">{sessionLabel}</span>
           </div>
           <button
             type="button"
